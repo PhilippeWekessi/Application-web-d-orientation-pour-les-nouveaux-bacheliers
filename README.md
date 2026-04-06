@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -57,3 +58,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# Application-web-d-orientation-pour-les-nouveaux-bacheliers
+OrientaBac est une plateforme web qui aide les nouveaux bacheliers à choisir  leur filière d'études supérieures grâce à un questionnaire d'orientation  personnalisé et un système de recommandations intelligent.
+>>>>>>> 68310b599f332d08bc68a0acceb922380771ce72
