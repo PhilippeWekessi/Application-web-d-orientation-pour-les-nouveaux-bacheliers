@@ -1,0 +1,17 @@
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+class Universite extends Model
+{
+    protected $table = 'universites';
+    protected $primaryKey = 'id_universite';
+    protected $fillable = ['nom', 'sigle', 'ville', 'type', 'latitude', 'longitude', 'id_annee'];
+
+    public function campus() {
+        return $this->hasMany(Campus::class, 'id_universite');
+    }
+    public function annee() {
+        return $this->belongsTo(Annee::class, 'id_annee');
+    }
+}
