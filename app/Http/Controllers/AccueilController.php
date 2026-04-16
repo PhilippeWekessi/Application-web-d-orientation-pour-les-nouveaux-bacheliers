@@ -9,7 +9,9 @@ class AccueilController extends Controller
 {
     public function index()
     {
-        $filieres = Filiere::take(8)->get();
+        $filieres = Filiere::with(['campus.universite'])
+                        ->take(8)
+                        ->get();
         $temoignages = Temoignage::where('statut', 'valide')
                         ->with(['user', 'filiere'])
                         ->take(3)

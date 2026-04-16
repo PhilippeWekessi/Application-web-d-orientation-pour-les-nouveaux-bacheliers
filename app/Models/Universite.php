@@ -6,7 +6,7 @@ class Universite extends Model
 {
     protected $table = 'universites';
     protected $primaryKey = 'id_universite';
-    protected $fillable = ['nom', 'sigle', 'ville', 'type', 'latitude', 'longitude', 'id_annee'];
+    protected $fillable = ['nom', 'sigle', 'ville', 'type', 'latitude', 'longitude', 'id_annee', 'statut', 'motif_rejet', 'id_responsable_soumis'];
 
     public function campus() {
         return $this->hasMany(Campus::class, 'id_universite');

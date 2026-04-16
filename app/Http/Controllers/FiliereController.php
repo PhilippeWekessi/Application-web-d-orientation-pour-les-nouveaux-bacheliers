@@ -11,7 +11,8 @@ class FiliereController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Filiere::with(['campus.universite', 'series']);
+        $query = Filiere::with(['campus.universite', 'series'])
+                ->where('statut', 'validee'); // ← Ajouter cette ligne
 
         // Recherche par nom
         if ($request->search) {
@@ -80,14 +81,43 @@ class FiliereController extends Controller
             'campus.universite',
             'series',
             'debouches',
-            'interets'
+            'interets',
+            'temoignages.user.serie',
         ])->findOrFail($id);
 
-        return view('filieres.show', compact('filiere'));
+        // Récupérer les matières avec coefficients pour la première série disponible
+        $serie = $filiere->series->first();
+        $matieres = collect();
+
+        if ($serie) {
+            $matieres = \App\Models\Matiere::join('filiere_serie_matieres', 'matieres.id_matiere', '=', 'filiere_serie_matieres.id_matiere')
+                ->where('filiere_serie_matieres.id_filiere', $filiere->id_filiere)
+                ->where('filiere_serie_matieres.id_serie', $serie->id_serie)
+                ->select('matieres.*', 'filiere_serie_matieres.coefficient')
+                ->get()
+                ->map(function($m) {
+                    $m->pivot = (object)['coefficient' => $m->coefficient];
+                    return $m;
+                });
+        }
+
+        // Récupérer le seuil bourse
+        $uniFiliere = \App\Models\UniFiliere::where('id_filiere', $filiere->id_filiere)->first();
+
+        // Témoignages validés pour cette filière
+        $temoignages = \App\Models\Temoignage::where('id_filiere', $filiere->id_filiere)
+                        ->where('statut', 'valide')
+                        ->with('user.serie')
+                        ->take(3)
+                        ->get();
+
+        return view('filieres.show', compact('filiere', 'matieres', 'uniFiliere', 'temoignages'));
     }
 
     public function campus() {
         return $this->belongsToMany(Campus::class, 'uni_filieres', 'id_filiere', 'id_campus')
                     ->with('universite');
     }
+
+    
 }
