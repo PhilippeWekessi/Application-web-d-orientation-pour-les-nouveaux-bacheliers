@@ -67,26 +67,25 @@
     <div class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-section-title">Général</div>
-        <a href="{{ route('admin.dashboard') }}" class="nav-item">
-          <span class="icon">📊</span> Tableau de bord
+        <a href="{{ route('admin.dashboard') }}" class="nav-item">Tableau de bord
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">Contenu</div>
         <a href="{{ route('admin.filieres') }}" class="nav-item active">
-          <span class="icon">📚</span> Filières
+          Filières
         </a>
         <a href="{{ route('admin.universites') }}" class="nav-item">
-          <span class="icon">🏛️</span> Universités & Campus
+          Universités & Campus
         </a>
         <a href="{{ route('admin.actualites') }}" class="nav-item">
-          <span class="icon">📰</span> Actualités
+          Actualités
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">Modération</div>
         <a href="{{ route('admin.temoignages') }}" class="nav-item">
-          <span class="icon">💬</span> Témoignages
+          Témoignages
         </a>
       </div>
     </div>
@@ -95,7 +94,7 @@
       <form method="POST" action="{{ route('admin.logout') }}">
         @csrf
         <button type="submit" class="btn-logout">
-          <span>🚪</span> Se déconnecter
+          Se déconnecter
         </button>
       </form>
     </div>

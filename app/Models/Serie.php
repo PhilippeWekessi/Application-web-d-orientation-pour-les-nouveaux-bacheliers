@@ -14,8 +14,15 @@ class Serie extends Model
     public function users() {
         return $this->hasMany(User::class, 'id_serie');
     }
+
     public function matieres() {
-        return $this->belongsToMany(Matiere::class, 'filiere_serie_matieres', 'id_serie', 'id_matiere')
-                    ->withPivot('coefficient');
+        return $this->belongsToMany(
+            Matiere::class,
+            'serie_matiere',  // pivot
+            'id_serie',       // FK → series
+            'id_matiere',     // FK dans le pivot
+            'id_serie',       // PK de series
+            'id_matieres'     // PK de matieres (avec s)
+        )->withPivot('coefficient');
     }
 }

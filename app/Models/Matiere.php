@@ -5,11 +5,12 @@ use Illuminate\Database\Eloquent\Model;
 class Matiere extends Model
 {
     protected $table = 'matieres';
-    protected $primaryKey = 'id_matiere';
+    protected $primaryKey = 'id_matieres';
     protected $fillable = ['nom'];
+    public $timestamps = false;
 
     public function series() {
-        return $this->belongsToMany(Serie::class, 'filiere_serie_matieres', 'id_matiere', 'id_serie')
+        return $this->belongsToMany(Serie::class, 'serie_matiere', 'id_matiere', 'id_serie')
                     ->withPivot('coefficient');
     }
     public function recommandations() {

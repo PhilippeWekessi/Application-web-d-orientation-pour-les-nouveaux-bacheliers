@@ -153,7 +153,7 @@
         </div>
 
         <div class="filter-card">
-          <h3>🏛️ Université</h3>
+          <h3>Université</h3>
           <select class="filter-select" name="universite"
                   onchange="document.getElementById('filter-form').submit()">
             <option value="">Toutes les universités</option>
@@ -167,7 +167,7 @@
         </div>
 
         <div class="filter-card">
-          <h3>📋 Mode d'entrée</h3>
+          <h3>Mode d'entrée</h3>
           <div class="filter-group">
             @foreach(['classement' => 'Classement', 'concours' => 'Concours', 'direct' => 'Direct'] as $val => $label)
               <label class="filter-item">
@@ -195,7 +195,7 @@
         </div>
 
         <div class="filter-card">
-          <h3>💰 Allocation</h3>
+          <h3>Allocation</h3>
           <div class="filter-group">
             <label class="filter-item">
               <input type="checkbox" name="bourse" value="1"
@@ -227,7 +227,7 @@
           <label>Trier par :</label>
           <select onchange="window.location='{{ route('filieres.index') }}?sort='+this.value+'&search={{ request('search') }}'">
             <option value="alpha" {{ request('sort') == 'alpha' ? 'selected' : '' }}>Alphabétique</option>
-            <option value="bourse" {{ request('sort') == 'bourse' ? 'selected' : '' }}>Quota bourse ↓</option>
+            <option value="bourse" {{ request('sort') == 'bourse' ? 'selected' : '' }}>Quota bourse </option>
             <option value="duree" {{ request('sort') == 'duree' ? 'selected' : '' }}>Durée</option>
           </select>
         </div>
@@ -241,7 +241,7 @@
             <div class="filiere-info">
               <div class="filiere-nom">{{ $filiere->nom }}</div>
               <div class="filiere-uni">
-                🏛️ {{ $filiere->campus->first()?->nom ?? 'N/A' }} —
+                {{ $filiere->campus->first()?->nom ?? 'N/A' }} —
                 {{ $filiere->campus->first()?->universite?->sigle ?? '' }}
               </div>
               <div class="filiere-tags">
@@ -264,7 +264,7 @@
           </div>
         @empty
           <div class="empty-state">
-            <h3>😕 Aucune filière trouvée</h3>
+            <h3>Aucune filière trouvée</h3>
             <p>Essayez d'autres critères de recherche.</p>
             <a href="{{ route('filieres.index') }}" style="color:#008751;font-weight:bold;">
               Réinitialiser la recherche

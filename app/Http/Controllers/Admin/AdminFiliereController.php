@@ -22,7 +22,7 @@ class AdminFiliereController extends Controller
     {
         if ($r = $this->checkAuth()) return $r;
 
-        $query = Filiere::with('campus.universite');
+        $query = Filiere::with(['campus.universite', 'responsableSoumis']);
         if ($request->statut) {
             $query->where('statut', $request->statut);
         }
@@ -45,42 +45,74 @@ class AdminFiliereController extends Controller
     {
         if ($r = $this->checkAuth()) return $r;
 
-        $request->validate([
-            'nom'          => 'required|string|max:200',
-            'description'  => 'required|string',
-            'duree_annees' => 'required|integer|min:1',
-            'mode_entree'  => 'required|in:classement,concours,dossier,direct',
-            'quota_bourse' => 'required|integer|min:0',
-            'quota_aide_fpp' => 'required|integer|min:0',
-            'seuil_bourse' => 'required|numeric|min:0|max:20',
-            'campus'       => 'required|array|min:1',
-            'series'       => 'required|array|min:1',
-        ]);
+        // Validation manuelle
+        $nom = trim($request->input('nom', ''));
+        $description = trim($request->input('description', ''));
+        $duree_annees = $request->input('duree_annees');
+        $mode_entree = trim($request->input('mode_entree', ''));
+        $quota_bourse = $request->input('quota_bourse');
+        $quota_aide_fpp = $request->input('quota_aide_fpp');
+        $seuil_bourse = $request->input('seuil_bourse');
+        $campus = $request->input('campus');
+        $series = $request->input('series');
+
+        $errors = [];
+        if (empty($nom) || strlen($nom) > 200) {
+            $errors['nom'] = 'Le nom est requis (max 200 caractères).';
+        }
+        if (empty($description)) {
+            $errors['description'] = 'La description est requise.';
+        }
+        if (empty($duree_annees) || !is_numeric($duree_annees) || $duree_annees < 1) {
+            $errors['duree_annees'] = 'La durée doit être un nombre égal ou supérieur à 1.';
+        }
+        if (empty($mode_entree) || !in_array($mode_entree, ['classement', 'concours', 'dossier', 'direct'])) {
+            $errors['mode_entree'] = 'Le mode d\'entrée est invalide.';
+        }
+        if (!is_numeric($quota_bourse) || $quota_bourse < 0) {
+            $errors['quota_bourse'] = 'Le quota bourse doit être égal ou supérieur à 0.';
+        }
+        if (!is_numeric($quota_aide_fpp) || $quota_aide_fpp < 0) {
+            $errors['quota_aide_fpp'] = 'Le quota aide FPP doit être égal ou supérieur à 0.';
+        }
+        if (!is_numeric($seuil_bourse) || $seuil_bourse < 0 || $seuil_bourse > 20) {
+            $errors['seuil_bourse'] = 'Le seuil bourse doit être entre 0 et 20.';
+        }
+        if (empty($campus) || !is_array($campus) || count($campus) < 1) {
+            $errors['campus'] = 'Au moins un campus est requis.';
+        }
+        if (empty($series) || !is_array($series) || count($series) < 1) {
+            $errors['series'] = 'Au moins une série est requise.';
+        }
+
+        if (!empty($errors)) {
+            return back()->withErrors($errors)->withInput();
+        }
 
         // Créer la filière directement validée par l'admin
         $filiere = Filiere::create([
-            'nom'            => $request->nom,
-            'description'    => $request->description,
-            'duree_annees'   => $request->duree_annees,
-            'mode_entree'    => $request->mode_entree,
-            'quota_bourse'   => $request->quota_bourse,
-            'quota_aide_fpp' => $request->quota_aide_fpp,
+            'nom'            => $nom,
+            'description'    => $description,
+            'duree_annees'   => (int)$duree_annees,
+            'mode_entree'    => $mode_entree,
+            'quota_bourse'   => (int)$quota_bourse,
+            'quota_aide_fpp' => (int)$quota_aide_fpp,
             'statut'         => 'validee',
         ]);
 
         // Lier aux campus
-        foreach ($request->campus as $id_campus) {
+        foreach ($campus as $id_campus) {
             DB::table('uni_filieres')->insert([
                 'id_campus'    => $id_campus,
                 'id_filiere'   => $filiere->id_filiere,
                 'id_annee'     => 1,
-                'quota_bourse' => $request->quota_bourse,
-                'seuil_bourse' => $request->seuil_bourse,
+                'quota_bourse' => (int)$quota_bourse,
+                'seuil_bourse' => (float)$seuil_bourse,
             ]);
         }
 
         // Lier aux séries
-        foreach ($request->series as $id_serie) {
+        foreach ($series as $id_serie) {
             DB::table('filiere_serie_matieres')->insert([
                 'id_filiere' => $filiere->id_filiere,
                 'id_serie'   => $id_serie,
@@ -128,14 +160,32 @@ class AdminFiliereController extends Controller
     {
         if ($r = $this->checkAuth()) return $r;
 
-        $request->validate([
-            'nom' => 'required|string|max:200',
-            'description' => 'required|string',
-            'statut' => 'required|in:en_attente,validee,rejetee',
-        ]);
+        // Validation manuelle
+        $nom = trim($request->input('nom', ''));
+        $description = trim($request->input('description', ''));
+        $statut = trim($request->input('statut', ''));
+
+        $errors = [];
+        if (empty($nom) || strlen($nom) > 200) {
+            $errors['nom'] = 'Le nom est requis (max 200 caractères).';
+        }
+        if (empty($description)) {
+            $errors['description'] = 'La description est requise.';
+        }
+        if (empty($statut) || !in_array($statut, ['en_attente', 'validee', 'rejetee'])) {
+            $errors['statut'] = 'Le statut est invalide.';
+        }
+
+        if (!empty($errors)) {
+            return back()->withErrors($errors)->withInput();
+        }
 
         $filiere = Filiere::findOrFail($id);
-        $filiere->update($request->only(['nom', 'description', 'statut']));
+        $filiere->update([
+            'nom' => $nom,
+            'description' => $description,
+            'statut' => $statut,
+        ]);
 
         return redirect()->route('admin.filieres')
                          ->with('success', 'Filière mise à jour !');
@@ -144,19 +194,29 @@ class AdminFiliereController extends Controller
     public function valider($id)
     {
         if ($r = $this->checkAuth()) return $r;
-        Filiere::findOrFail($id)->update(['statut' => 'validee', 'motif_rejet' => null]);
-        return back()->with('success', 'Filière validée !');
+        $filiere = Filiere::findOrFail($id);
+        $filiere->update(['statut' => 'validee', 'motif_rejet' => null]);
+
+        return back()->with('success', '✅ Filière validée avec succès !');
     }
 
     public function rejeter(Request $request, $id)
     {
         if ($r = $this->checkAuth()) return $r;
-        $request->validate(['motif' => 'required|string']);
-        Filiere::findOrFail($id)->update([
+
+        // Validation manuelle
+        $motif = trim($request->input('motif', ''));
+        if (empty($motif) || strlen($motif) < 5) {
+            return back()->withErrors(['motif' => 'Le motif doit contenir au moins 5 caractères.'])->withInput();
+        }
+
+        $filiere = Filiere::findOrFail($id);
+        $filiere->update([
             'statut'      => 'rejetee',
-            'motif_rejet' => $request->motif,
+            'motif_rejet' => $motif,
         ]);
-        return back()->with('success', 'Filière rejetée.');
+
+        return back()->with('success', '❌ Filière rejetée. Le responsable en a été informé.');
     }
 
     public function destroy($id)

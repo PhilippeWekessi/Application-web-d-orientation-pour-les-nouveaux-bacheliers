@@ -17,11 +17,15 @@ return new class extends Migration
             $table->string('sigle', 30);
             $table->string('ville', 100);
             $table->enum('type', ['public', 'prive']);
+            $table->enum('statut', ['en_attente', 'validee', 'rejetee'])->default('validee');
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->unsignedBigInteger('id_annee');
             $table->foreign('id_annee')->references('id_annee')->on('annees')->cascadeOnDelete();
             $table->timestamps();
+            $table->unsignedBigInteger('id_responsable_soumis')->nullable();
+            $table->foreign('id_responsable_soumis')->references('id_responsable')->on('responsables')->nullOnDelete();
+
         });
     }
 

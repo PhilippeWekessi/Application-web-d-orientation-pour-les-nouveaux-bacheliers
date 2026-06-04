@@ -38,10 +38,10 @@
   </div>
   <div class="container">
     @if(session('success'))
-      <div class="alert-success">✅ {{ session('success') }}</div>
+      <div class="alert-success">{{ session('success') }}</div>
     @endif
     <div class="page-header">
-      <h1>🔑 Comptes responsables universités</h1>
+      <h1>Comptes responsables universités</h1>
       <a href="{{ route('admin.responsables.create') }}" class="btn-add">+ Créer un compte</a>
     </div>
     <div class="panel">
@@ -58,11 +58,11 @@
             <td>{{ $r->fonction ?? '—' }}</td>
             <td>
               @if($r->statut === 'actif')
-                <span class="badge badge-green">✅ Actif</span>
+                <span class="badge badge-green">Actif</span>
               @elseif($r->statut === 'en_attente')
-                <span class="badge badge-yellow">⏳ En attente</span>
+                <span class="badge badge-yellow">En attente</span>
               @else
-                <span class="badge badge-red">❌ Inactif</span>
+                <span class="badge badge-red">Inactif</span>
               @endif
             </td>
             <td>
@@ -70,13 +70,13 @@
                 @if($r->statut !== 'actif')
                   <form method="POST" action="{{ route('admin.responsables.valider', $r->id_responsable) }}">
                     @csrf
-                    <button type="submit" class="btn-val">✅ Valider</button>
+                    <button type="submit" class="btn-val">Valider</button>
                   </form>
                 @endif
                 @if($r->statut !== 'inactif')
                   <form method="POST" action="{{ route('admin.responsables.rejeter', $r->id_responsable) }}">
                     @csrf
-                    <button type="submit" class="btn-rej">❌ Désactiver</button>
+                    <button type="submit" class="btn-rej">Désactiver</button>
                   </form>
                 @endif
               </div>

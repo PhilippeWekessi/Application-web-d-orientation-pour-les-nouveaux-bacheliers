@@ -36,15 +36,22 @@
   </div>
   <div class="container">
     @if(session('success'))
-      <div class="alert-success">✅ {{ session('success') }}</div>
+      <div class="alert-success">{{ session('success') }}</div>
     @endif
     <div class="page-header">
-      <h1>💬 Modération des témoignages</h1>
+      <h1>Modération des témoignages</h1>
     </div>
     <div class="panel">
       <table class="table">
         <thead>
-          <tr><th>Étudiant</th><th>Filière</th><th>Note</th><th>Contenu</th><th>Statut</th><th>Actions</th></tr>
+          <tr>
+            <th>Étudiant</th>
+            <th>Filière</th>
+            <th>Note</th>
+            <th>Contenu</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
           @forelse($temoignages as $t)
@@ -55,11 +62,11 @@
             <td style="max-width:300px;">{{ Str::limit($t->contenu, 80) }}</td>
             <td>
               @if($t->statut === 'valide')
-                <span class="badge badge-green">✅ Validé</span>
+                <span class="badge badge-green">Validé</span>
               @elseif($t->statut === 'en_attente')
-                <span class="badge badge-yellow">⏳ En attente</span>
+                <span class="badge badge-yellow">En attente</span>
               @else
-                <span class="badge badge-red">❌ Rejeté</span>
+                <span class="badge badge-red">Rejeté</span>
               @endif
             </td>
             <td>
@@ -67,13 +74,13 @@
                 @if($t->statut !== 'valide')
                   <form method="POST" action="{{ route('admin.temoignages.valider', $t->id_temoignage) }}">
                     @csrf
-                    <button type="submit" class="btn-val">✅ Valider</button>
+                    <button type="submit" class="btn-val">Valider</button>
                   </form>
                 @endif
                 @if($t->statut !== 'rejete')
                   <form method="POST" action="{{ route('admin.temoignages.rejeter', $t->id_temoignage) }}">
                     @csrf
-                    <button type="submit" class="btn-rej">❌ Rejeter</button>
+                    <button type="submit" class="btn-rej">Rejeter</button>
                   </form>
                 @endif
               </div>

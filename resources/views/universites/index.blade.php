@@ -109,7 +109,7 @@
 
   <!-- HERO -->
   <div class="hero">
-    <h1>🏛️ Universités & Établissements</h1>
+    <h1>Universités & Établissements</h1>
     <p>Explore toutes les institutions d'enseignement supérieur disponibles au Bénin</p>
     <form method="GET" action="{{ route('universites.index') }}">
       <div class="search-bar">
@@ -155,7 +155,6 @@
       @forelse($universites as $universite)
         <div class="uni-card" onclick="window.location='{{ route('universites.show', $universite->id_universite) }}'">
           <div class="uni-card-top">
-            🏛️
             <span class="uni-type-badge {{ $universite->type == 'public' ? 'badge-public' : 'badge-agree' }}">
               {{ $universite->type == 'public' ? 'Public' : 'Agréé' }}
             </span>
@@ -163,7 +162,7 @@
           <div class="uni-card-body">
             <div class="uni-sigle">{{ $universite->sigle }}</div>
             <div class="uni-nom">{{ $universite->nom }}</div>
-            <div class="uni-ville">📍 {{ $universite->ville }}</div>
+            <div class="uni-ville">{{ $universite->ville }}</div>
             <div class="uni-stats">
               <div class="uni-stat">
                 <h4>{{ $universite->campus->count() }}</h4>

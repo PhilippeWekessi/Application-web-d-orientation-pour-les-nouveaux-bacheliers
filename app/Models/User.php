@@ -6,8 +6,11 @@ class User extends Model
 {
     protected $table = 'users';
     protected $primaryKey = 'id_user';
-    protected $fillable = ['nom', 'prenom', 'email', 'password', 'id_serie'];
+    protected $fillable = ['nom', 'prenom', 'email', 'password', 'id_serie', 'photo', 'questionnaire_data'];
     protected $hidden = ['password'];
+    protected $casts = [
+        'questionnaire_data' => 'array',
+    ];
 
     public function serie() {
         return $this->belongsTo(Serie::class, 'id_serie');

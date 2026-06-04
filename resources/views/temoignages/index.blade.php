@@ -119,9 +119,9 @@
 
   <!-- HERO -->
   <div class="hero">
-    <h1>💬 Témoignages d'étudiants</h1>
+    <h1>Témoignages d'étudiants</h1>
     <p>Découvre les expériences de ceux qui ont choisi leur filière grâce à OrientaBac. Partage aussi la tienne !</p>
-    <a href="#soumettre" class="btn-soumettre">✍️ Soumettre mon témoignage</a>
+    <a href="{{ route('temoignages.create') }}" class="btn-soumettre">Soumettre mon témoignage</a>
   </div>
 
   <!-- STATS -->
@@ -216,98 +216,5 @@
       {{ $temoignages->appends(request()->query())->links('vendor.pagination.custom') }}
     </div>
 
-    <!-- FORMULAIRE -->
-    <div class="form-section" id="soumettre">
-      <h2>✍️ Soumettre mon témoignage</h2>
-      <p>Partage ton expérience pour aider les futurs bacheliers dans leur choix d'orientation.</p>
-
-      @if(session('success'))
-        <div class="alert-success">✅ {{ session('success') }}</div>
-      @endif
-      @if($errors->any())
-        <div class="alert-error">
-          @foreach($errors->all() as $error)
-            <p>{{ $error }}</p>
-          @endforeach
-        </div>
-      @endif
-
-      <form method="POST" action="{{ route('temoignages.store') }}">
-        @csrf
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Nom et prénom *</label>
-            <input type="text" name="nom_prenom" placeholder="Ex: Kolade Ahounou"
-                   value="{{ old('nom_prenom') }}" required />
-          </div>
-          <div class="form-group">
-            <label>Filière concernée *</label>
-            <select name="id_filiere" required>
-              <option value="">-- Sélectionner une filière --</option>
-              @foreach($filieres as $filiere)
-                <option value="{{ $filiere->id_filiere }}"
-                  {{ old('id_filiere') == $filiere->id_filiere ? 'selected' : '' }}>
-                  {{ $filiere->nom }}
-                </option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Année d'étude *</label>
-            <select name="annee_etude" required>
-              <option value="1">1ère année</option>
-              <option value="2">2ème année</option>
-              <option value="3">3ème année</option>
-              <option value="diplome">Diplômé</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Série du baccalauréat</label>
-            <select name="id_serie">
-              <option value="">-- Série --</option>
-              @foreach($series as $serie)
-                <option value="{{ $serie->id_serie }}"
-                  {{ old('id_serie') == $serie->id_serie ? 'selected' : '' }}>
-                  {{ $serie->libelle }}
-                </option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom:16px;">
-          <label>Note (étoiles) *</label>
-          <div class="stars-input">
-            @for($i = 1; $i <= 5; $i++)
-              <button type="button" class="star-btn {{ old('note', 0) >= $i ? 'active' : '' }}"
-                      onclick="setNote({{ $i }})">★</button>
-            @endfor
-          </div>
-          <input type="hidden" name="note" id="note-input" value="{{ old('note', 0) }}" />
-        </div>
-
-        <div class="form-group" style="margin-bottom:20px;">
-          <label>Ton témoignage *</label>
-          <textarea name="contenu" placeholder="Partage ton expérience..." required>{{ old('contenu') }}</textarea>
-        </div>
-
-        <button type="submit" class="btn-envoyer">Envoyer mon témoignage</button>
-        <p style="font-size:12px;color:#999;margin-top:12px;">⚠️ Ton témoignage sera vérifié par notre équipe avant publication.</p>
-      </form>
-    </div>
-
   </section>
-@endsection
-
-@section('scripts')
-<script>
-  let noteActuelle = {{ old('note', 0) }};
-  function setNote(n) {
-    noteActuelle = n;
-    document.getElementById('note-input').value = n;
-    document.querySelectorAll('.star-btn').forEach((btn, i) => {
-      btn.classList.toggle('active', i < n);
-    });
-  }
-</script>
 @endsection

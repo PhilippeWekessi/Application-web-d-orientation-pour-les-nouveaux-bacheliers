@@ -9,10 +9,13 @@ class AccueilController extends Controller
 {
     public function index()
     {
-        $filieres = Filiere::with(['campus.universite'])
-                        ->take(8)
-                        ->get();
+        // Charger les filieres sans relations (qui causent des timeouts)
+        $filieres = Filiere::take(8)->get();
+
+        // Récupérer les témoignages valides avec vérification des relations
         $temoignages = Temoignage::where('statut', 'valide')
+                        ->whereHas('user')
+                        ->whereHas('filiere')
                         ->with(['user', 'filiere'])
                         ->take(3)
                         ->get();

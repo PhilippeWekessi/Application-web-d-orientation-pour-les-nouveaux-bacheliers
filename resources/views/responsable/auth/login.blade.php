@@ -53,6 +53,10 @@
       <button type="submit" class="btn">Se connecter</button>
     </form>
 
+    <div class="footer-link" style="margin-top:10px;">
+      <a href="{{ route('responsable.password.request') }}">Mot de passe oublié ?</a>
+    </div>
+
     <div class="footer-link">
       Pas encore de compte ? <a href="{{ route('responsable.register') }}">Créer un compte</a>
     </div>

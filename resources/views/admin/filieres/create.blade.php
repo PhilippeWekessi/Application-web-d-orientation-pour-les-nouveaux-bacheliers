@@ -69,18 +69,18 @@
 
       <!-- INFOS GENERALES -->
       <div class="card">
-        <h2>📚 Informations générales</h2>
+        <h2>Informations générales</h2>
         <div class="form-grid">
           <div class="form-group full">
             <label>Nom de la filière <span>*</span></label>
             <input type="text" name="nom" value="{{ old('nom') }}" placeholder="Ex: Génie Logiciel" required />
           </div>
           <div class="form-group full">
-            <label>Description <span>*</span></label>
+            <label>Description</label>
             <textarea name="description" placeholder="Décrivez la filière..." required>{{ old('description') }}</textarea>
           </div>
           <div class="form-group">
-            <label>Durée (années) <span>*</span></label>
+            <label>Durée (années)</label>
             <select name="duree_annees" required>
               <option value="">-- Sélectionner --</option>
               @for($i = 1; $i <= 10; $i++)
@@ -91,7 +91,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Mode d'entrée <span>*</span></label>
+            <label>Mode d'entrée</label>
             <select name="mode_entree" required>
               <option value="">-- Sélectionner --</option>
               <option value="classement" {{ old('mode_entree') == 'classement' ? 'selected' : '' }}>Classement</option>
@@ -101,15 +101,15 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Quota bourse <span>*</span></label>
+            <label>Quota bourse</label>
             <input type="number" name="quota_bourse" value="{{ old('quota_bourse', 0) }}" min="0" required />
           </div>
           <div class="form-group">
-            <label>Quota FPP <span>*</span></label>
+            <label>Quota FPP</label>
             <input type="number" name="quota_aide_fpp" value="{{ old('quota_aide_fpp', 0) }}" min="0" required />
           </div>
           <div class="form-group">
-            <label>Seuil bourse /20 <span>*</span></label>
+            <label>Seuil bourse /20</label>
             <input type="number" name="seuil_bourse" value="{{ old('seuil_bourse', 12) }}" min="0" max="20" step="0.5" required />
           </div>
         </div>
@@ -117,7 +117,7 @@
 
       <!-- CAMPUS -->
       <div class="card">
-        <h2>🏛️ Campus proposant cette filière <span style="color:#E8112D;font-size:14px;">*</span></h2>
+        <h2>Campus proposant cette filière <span style="color:#E8112D;font-size:14px;"></span></h2>
         <div class="campus-grid">
           @foreach($campus as $c)
             <div class="campus-item" id="campus-item-{{ $c->id_campus }}"
@@ -134,7 +134,7 @@
 
       <!-- SERIES -->
       <div class="card">
-        <h2>🎓 Séries acceptées <span style="color:#E8112D;font-size:14px;">*</span></h2>
+        <h2>Séries acceptées <span style="color:#E8112D;font-size:14px;"></span></h2>
         <div class="series-grid">
           @foreach($series as $serie)
             <div class="serie-item" id="serie-item-{{ $serie->id_serie }}"
@@ -151,7 +151,7 @@
 
       <!-- INTERETS -->
       <div class="card">
-        <h2>❤️ Centres d'intérêt associés</h2>
+        <h2>Centres d'intérêt associés</h2>
         <div class="interets-grid">
           @foreach($interets as $interet)
             <div class="interet-item" id="interet-item-{{ $interet->id_interet }}"
@@ -168,14 +168,14 @@
 
       <!-- DEBOUCHES -->
       <div class="card">
-        <h2>💼 Débouchés professionnels</h2>
+        <h2>Débouchés professionnels</h2>
         <div class="form-group">
           <label>Liste des débouchés <small style="color:#999;font-weight:normal;">(séparés par des virgules)</small></label>
           <textarea name="debouches" placeholder="Ex: Développeur web, Analyste programmeur, Chef de projet IT">{{ old('debouches') }}</textarea>
         </div>
       </div>
 
-      <button type="submit" class="btn-submit">✅ Ajouter la filière</button>
+      <button type="submit" class="btn-submit">Ajouter la filière</button>
 
     </form>
   </div>

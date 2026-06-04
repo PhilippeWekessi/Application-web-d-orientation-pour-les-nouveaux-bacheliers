@@ -336,8 +336,8 @@
   <div class="hero-resultat">
     <div class="hero-top">
       <div class="hero-title">
-        <h1>🏆 Tes recommandations personnalisées</h1>
-        <p>Basées sur ta moyenne de classement MESRS, ta série et tes centres d'intérêt. Consulte chaque filière pour voir les détails et simuler ton admissibilité.</p>
+        <h1>Tes recommandations personnalisées</h1>
+        <p>Basées sur ta moyenne de classement MESRS, ta série et ta filière choisie. Consulte chaque filière pour voir les détails et simuler ton admissibilité.</p>
 
         <!-- STATS RAPIDES -->
         <div class="stats-rapides">
@@ -401,13 +401,13 @@
         Tout afficher <span class="count">{{ count($resultats) }}</span>
       </button>
       <button class="filtre-btn" onclick="filtrer('boursier', this)">
-        🟢 Boursier <span class="count">{{ $nbBoursier }}</span>
+        Boursier <span class="count">{{ $nbBoursier }}</span>
       </button>
       <button class="filtre-btn" onclick="filtrer('fpp', this)">
-        🟡 FPP <span class="count">{{ $nbFpp }}</span>
+        FPP <span class="count">{{ $nbFpp }}</span>
       </button>
       <button class="filtre-btn" onclick="filtrer('non_admis', this)">
-        🔴 Non admis <span class="count">{{ $nbNonAdmis }}</span>
+        Non admis <span class="count">{{ $nbNonAdmis }}</span>
       </button>
     </div>
 
@@ -430,16 +430,16 @@
             <div class="result-info">
               <div class="result-filiere-nom">{{ $item['filiere']->nom }}</div>
               <div class="result-etablissement">
-                🏛️ {{ $item['filiere']->campus->first()?->nom ?? 'N/A' }}
+                {{ $item['filiere']->campus->first()?->nom ?? 'N/A' }}
                 — {{ $item['filiere']->campus->first()?->universite?->nom ?? '' }}
               </div>
               <div class="result-tags">
                 @if($diagnostic === 'boursier')
-                  <span class="rtag rtag-diagnostic-boursier">🟢 Boursier potentiel</span>
+                  <span class="rtag rtag-diagnostic-boursier">Boursier potentiel</span>
                 @elseif($diagnostic === 'fpp')
-                  <span class="rtag rtag-diagnostic-fpp">🟡 FPP disponible</span>
+                  <span class="rtag rtag-diagnostic-fpp">FPP disponible</span>
                 @else
-                  <span class="rtag rtag-diagnostic-non">🔴 Score insuffisant</span>
+                  <span class="rtag rtag-diagnostic-non">Score insuffisant</span>
                 @endif
                 <span class="rtag rtag-duree">⏱ {{ $item['filiere']->duree_annees }} ans</span>
                 <span class="rtag rtag-seuil">
@@ -469,7 +469,7 @@
         </div>
       @empty
         <div class="empty-state">
-          <div class="empty-icon">😕</div>
+          <div class="empty-icon"></div>
           <h3>Aucune filière trouvée</h3>
           <p>Aucune filière ne correspond à ta série pour l'instant.<br>La base de données est en cours d'alimentation.</p>
           <a href="{{ route('questionnaire') }}">← Refaire le questionnaire</a>
@@ -479,11 +479,11 @@
 
     <!-- CTA SAVE -->
     <div class="cta-save">
-      <h3>💾 Sauvegarde tes résultats</h3>
+      <h3>Sauvegarde tes résultats</h3>
       <p>Crée un compte gratuit pour retrouver tes recommandations à tout moment et les partager avec tes parents ou conseillers.</p>
       <div class="cta-save-btns">
-        <a href="{{ route('register') }}" class="btn-save">✅ Créer un compte gratuit</a>
-        <a href="{{ route('questionnaire') }}" class="btn-retry">🔄 Refaire le questionnaire</a>
+        <a href="{{ route('register') }}" class="btn-save">Créer un compte gratuit</a>
+        <a href="{{ route('questionnaire') }}" class="btn-retry">Refaire le questionnaire</a>
       </div>
     </div>
 

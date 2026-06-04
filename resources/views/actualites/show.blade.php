@@ -96,7 +96,7 @@
         @if($actualite->image)
           <img src="{{ asset('storage/' . $actualite->image) }}" alt="{{ $actualite->titre }}" />
         @else
-          📢
+          
         @endif
       </div>
       <div class="actu-body">

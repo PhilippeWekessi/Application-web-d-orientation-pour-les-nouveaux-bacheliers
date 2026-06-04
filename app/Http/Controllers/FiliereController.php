@@ -12,48 +12,40 @@ class FiliereController extends Controller
     public function index(Request $request)
     {
         $query = Filiere::with(['campus.universite', 'series'])
-                ->where('statut', 'validee'); // ← Ajouter cette ligne
+                ->where('statut', 'validee');
 
-        // Recherche par nom
         if ($request->search) {
             $query->where('nom', 'like', '%' . $request->search . '%');
         }
 
-        // Filtre par série
         if ($request->series) {
             $query->whereHas('series', function($q) use ($request) {
                 $q->whereIn('series.id_serie', $request->series);
             });
         }
 
-        // Filtre par université
         if ($request->universite) {
             $query->whereHas('campus.universite', function($q) use ($request) {
                 $q->where('id_universite', $request->universite);
             });
         }
 
-        // Filtre par mode d'entrée
         if ($request->mode) {
             $query->whereIn('mode_entree', $request->mode);
         }
 
-        // Filtre par durée
         if ($request->duree) {
             $query->whereIn('duree_annees', $request->duree);
         }
 
-        // Filtre bourse
         if ($request->bourse) {
             $query->where('quota_bourse', '>', 0);
         }
 
-        // Filtre FPP
         if ($request->fpp) {
             $query->where('quota_aide_fpp', '>', 0);
         }
 
-        // Tri
         switch ($request->sort) {
             case 'bourse':
                 $query->orderBy('quota_bourse', 'desc');
@@ -85,12 +77,11 @@ class FiliereController extends Controller
             'temoignages.user.serie',
         ])->findOrFail($id);
 
-        // Récupérer les matières avec coefficients pour la première série disponible
         $serie = $filiere->series->first();
         $matieres = collect();
 
         if ($serie) {
-            $matieres = \App\Models\Matiere::join('filiere_serie_matieres', 'matieres.id_matiere', '=', 'filiere_serie_matieres.id_matiere')
+            $matieres = \App\Models\Matiere::join('filiere_serie_matieres', 'matieres.id_matieres', '=', 'filiere_serie_matieres.id_matiere') // ← corrigé
                 ->where('filiere_serie_matieres.id_filiere', $filiere->id_filiere)
                 ->where('filiere_serie_matieres.id_serie', $serie->id_serie)
                 ->select('matieres.*', 'filiere_serie_matieres.coefficient')
@@ -101,10 +92,8 @@ class FiliereController extends Controller
                 });
         }
 
-        // Récupérer le seuil bourse
         $uniFiliere = \App\Models\UniFiliere::where('id_filiere', $filiere->id_filiere)->first();
 
-        // Témoignages validés pour cette filière
         $temoignages = \App\Models\Temoignage::where('id_filiere', $filiere->id_filiere)
                         ->where('statut', 'valide')
                         ->with('user.serie')
@@ -118,6 +107,4 @@ class FiliereController extends Controller
         return $this->belongsToMany(Campus::class, 'uni_filieres', 'id_filiere', 'id_campus')
                     ->with('universite');
     }
-
-    
 }

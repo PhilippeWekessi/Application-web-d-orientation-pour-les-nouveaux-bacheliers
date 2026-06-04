@@ -145,22 +145,22 @@
       <div class="hero-fiche-icon">🎓</div>
       <h1>{{ $filiere->nom }}</h1>
       <div class="hero-fiche-uni">
-        🏛️ {{ $filiere->campus->first()?->nom ?? 'N/A' }} —
+        {{ $filiere->campus->first()?->nom ?? 'N/A' }} —
         {{ $filiere->campus->first()?->universite?->nom ?? '' }}
       </div>
       <div class="hero-tags">
         @if($filiere->quota_bourse > 0)
-          <span class="htag htag-green">🟢 Bourse disponible</span>
+          <span class="htag htag-green">Bourse disponible</span>
         @endif
         <span class="htag htag-yellow">⏱ {{ $filiere->duree_annees }} ans</span>
-        <span class="htag htag-white">📋 {{ ucfirst($filiere->mode_entree) }}</span>
+        <span class="htag htag-white">{{ ucfirst($filiere->mode_entree) }}</span>
         @foreach($filiere->series->take(4) as $serie)
           <span class="htag htag-white">Série {{ $serie->code }}</span>
         @endforeach
       </div>
     </div>
     <div class="hero-fiche-right">
-      <a href="{{ route('questionnaire') }}" class="btn-simuler">🎯 Simuler mon admissibilité</a>
+      <a href="{{ route('questionnaire') }}" class="btn-simuler">Simuler mon admissibilité</a>
     </div>
   </div>
 
@@ -171,13 +171,13 @@
 
       <!-- DESCRIPTION -->
       <div class="info-card">
-        <h2>📖 Description</h2>
+        <h2>Description</h2>
         <p class="desc-text">{{ $filiere->description ?? 'Description non disponible.' }}</p>
       </div>
 
       <!-- INFOS GENERALES -->
       <div class="info-card">
-        <h2>📋 Informations générales</h2>
+        <h2>Informations générales</h2>
         <div class="info-grid">
           <div class="info-item">
             <label>Établissement</label>
@@ -208,7 +208,7 @@
 
       <!-- MATIERES FONDAMENTALES -->
       <div class="info-card">
-        <h2>📐 Matières fondamentales et coefficients</h2>
+        <h2>Matières fondamentales et coefficients</h2>
         @if($matieres->isNotEmpty())
           <div class="matieres-list">
             @foreach($matieres as $matiere)
@@ -230,7 +230,7 @@
 
       <!-- SERIES RECOMMANDEES -->
       <div class="info-card">
-        <h2>🎓 Séries recommandées</h2>
+        <h2>Séries recommandées</h2>
         <div class="series-list">
           @forelse($filiere->series->unique('id_serie') as $serie)
             <span class="serie-badge">Série {{ $serie->code }}</span>
@@ -242,7 +242,7 @@
 
       <!-- DEBOUCHES -->
       <div class="info-card">
-        <h2>💼 Débouchés et métiers</h2>
+        <h2>Débouchés et métiers</h2>
         @if($filiere->debouches->isNotEmpty())
           <div class="debouches-grid">
             @foreach($filiere->debouches as $debouche)
@@ -256,7 +256,7 @@
 
       <!-- TEMOIGNAGES -->
       <div class="info-card">
-        <h2>💬 Témoignages d'étudiants</h2>
+        <h2>Témoignages d'étudiants</h2>
         @if($temoignages->isNotEmpty())
           <div class="tem-list">
             @foreach($temoignages as $temoignage)
@@ -287,13 +287,13 @@
 
       <!-- QUOTAS -->
       <div class="quota-card">
-        <h3>📊 Quotas {{ date('Y') }}</h3>
+        <h3>Quotas {{ date('Y') }}</h3>
         <div class="quota-item">
-          <span class="quota-label">🟢 Bourses</span>
+          <span class="quota-label">Bourses</span>
           <span class="quota-val">{{ $filiere->quota_bourse }}</span>
         </div>
         <div class="quota-item">
-          <span class="quota-label">🟡 FPP</span>
+          <span class="quota-label">FPP</span>
           <span class="quota-val yellow">{{ $filiere->quota_aide_fpp }}</span>
         </div>
         @if($uniFiliere)
@@ -306,13 +306,13 @@
 
       <!-- CAMPUS -->
       <div class="campus-card">
-        <h3>🏛️ Campus proposant cette filière</h3>
+        <h3>Campus proposant cette filière</h3>
         @forelse($filiere->campus as $campus)
           <div class="campus-item">
-            <div style="font-size:20px;">🏫</div>
+            <div style="font-size:20px;"></div>
             <div class="campus-info" style="flex:1;">
               <div class="campus-nom">{{ $campus->nom }}</div>
-              <div class="campus-ville">📍 {{ $campus->ville }}</div>
+              <div class="campus-ville">{{ $campus->ville }}</div>
             </div>
           </div>
         @empty
@@ -322,7 +322,7 @@
 
       <!-- SIMULATEUR -->
       <div class="sim-card">
-        <h3>🎯 Simuler mon admissibilité</h3>
+        <h3>Simuler mon admissibilité</h3>
         <p>Entre tes notes pour voir si tu es éligible à une bourse dans cette filière.</p>
         <div class="sim-input-group" id="simInputs">
           @foreach($matieres as $i => $matiere)
@@ -377,17 +377,17 @@
       div.style.backgroundColor = 'rgba(0,135,81,0.1)';
       div.style.color  = '#008751';
       div.style.border = '1px solid #008751';
-      div.innerHTML    = '🟢 Moyenne : <strong>' + moyenne.toFixed(2) + '/20</strong><br>Éligible à une <strong>bourse</strong> !';
+      div.innerHTML    = 'Moyenne : <strong>' + moyenne.toFixed(2) + '/20</strong><br>Éligible à une <strong>bourse</strong> !';
     } else if (moyenne >= seuilFpp) {
       div.style.backgroundColor = 'rgba(252,209,22,0.15)';
       div.style.color  = '#c9a000';
       div.style.border = '1px solid #FCD116';
-      div.innerHTML    = '🟡 Moyenne : <strong>' + moyenne.toFixed(2) + '/20</strong><br>Éligible en <strong>FPP</strong>';
+      div.innerHTML    = 'Moyenne : <strong>' + moyenne.toFixed(2) + '/20</strong><br>Éligible en <strong>FPP</strong>';
     } else {
       div.style.backgroundColor = 'rgba(232,17,45,0.08)';
       div.style.color  = '#E8112D';
       div.style.border = '1px solid #E8112D';
-      div.innerHTML    = '🔴 Moyenne : <strong>' + moyenne.toFixed(2) + '/20</strong><br><strong>Score insuffisant</strong>';
+      div.innerHTML    = 'Moyenne : <strong>' + moyenne.toFixed(2) + '/20</strong><br><strong>Score insuffisant</strong>';
     }
   }
 </script>

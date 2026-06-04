@@ -20,6 +20,7 @@
     .btn-login { width: 100%; padding: 13px; background-color: #008751; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 8px; }
     .btn-login:hover { background-color: #006b40; }
     .alert-error { background: rgba(232,17,45,0.1); border: 1px solid #E8112D; color: #E8112D; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
+    .alert-success { background: rgba(0,135,81,0.1); border: 1px solid #008751; color: #008751; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .top-band { height: 6px; background: linear-gradient(to right, #008751 33%, #FCD116 33% 66%, #E8112D 66%); border-radius: 16px 16px 0 0; margin: -40px -40px 30px; }
   </style>
 </head>
@@ -31,6 +32,9 @@
       <p>Espace réservé aux administrateurs MESRS</p>
     </div>
 
+    @if(session('success'))
+      <div class="alert-success">✅ {{ session('success') }}</div>
+    @endif
     @if($errors->any())
       <div class="alert-error">{{ $errors->first() }}</div>
     @endif
@@ -47,6 +51,9 @@
       </div>
       <button type="submit" class="btn-login">Se connecter</button>
     </form>
+    <div style="margin-top: 16px; text-align: center; font-size: 14px;">
+      <a href="{{ route('admin.password.request') }}" style="color:#008751; font-weight:bold; text-decoration:none;">Mot de passe oublié ?</a>
+    </div>
   </div>
 </body>
 </html>

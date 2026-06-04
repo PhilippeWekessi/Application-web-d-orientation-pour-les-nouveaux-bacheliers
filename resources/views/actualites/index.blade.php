@@ -106,7 +106,7 @@
             @if($actualite->image)
               <img src="{{ asset('storage/' . $actualite->image) }}" alt="{{ $actualite->titre }}" />
             @else
-              📢
+              
             @endif
           </div>
           <div class="card-body">
@@ -119,7 +119,7 @@
         </div>
       @empty
         <div style="grid-column: 1/-1; text-align:center; padding:60px 20px; color:#777;">
-          <p style="font-size:18px; margin-bottom:10px;">📭 Aucune actualité disponible pour le moment</p>
+          <p style="font-size:18px; margin-bottom:10px;">Aucune actualité disponible pour le moment</p>
           <p>Les actualités sont publiées par l'administrateur. Revenez bientôt pour découvrir les dernières nouvelles !</p>
         </div>
       @endforelse

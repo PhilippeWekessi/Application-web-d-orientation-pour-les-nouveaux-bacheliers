@@ -30,10 +30,10 @@
   </div>
   <div class="container">
     @if(session('success'))
-      <div class="alert-success">✅ {{ session('success') }}</div>
+      <div class="alert-success">{{ session('success') }}</div>
     @endif
     <div class="page-header">
-      <h1>📰 Gestion des actualités</h1>
+      <h1>Gestion des actualités</h1>
       <a href="{{ route('admin.actualites.create') }}" class="btn-add">+ Publier une actualité</a>
     </div>
     <div class="panel">
@@ -49,7 +49,7 @@
             <td>
               <form method="POST" action="{{ route('admin.actualites.destroy', $a->id_actualite) }}">
                 @csrf @method('DELETE')
-                <button type="submit" class="btn-del" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</button>
+                <button type="submit" class="btn-del" onclick="return confirm('Supprimer ?')">Supprimer</button>
               </form>
             </td>
           </tr>

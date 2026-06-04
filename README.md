@@ -1,64 +1,31 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Application web d'orientation pour les nouveaux bacheliers
+OrientaBac est une plateforme web qui aide les nouveaux bacheliers à choisir leur filière d'études supérieures grâce à un questionnaire d'orientation personnalisé et un système de recommandations intelligent.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Data model summary
 
-## About Laravel
+The platform manages three main actors with profile photos and the following key attributes:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Class | Attribute | Description | Type | Size |
+| --- | --- | --- | --- | --- |
+| Admin | id_admin | Identifiant unique de l'administrateur (PK) | INT | 11 |
+|  | nom | Nom de l'administrateur | VARCHAR | 100 |
+|  | prenom | Prénom de l'administrateur | VARCHAR | 100 |
+|  | email | Adresse email de l'administrateur | VARCHAR | 150 |
+|  | password | Mot de passe chiffré | VARCHAR | 255 |
+|  | photo | Chemin de la photo de profil de l'administrateur | VARCHAR | 255 |
+| Responsable | id_responsable | Identifiant unique du responsable (PK) | INT | 11 |
+|  | nom | Nom du responsable | VARCHAR | 100 |
+|  | prenom | Prénom du responsable | VARCHAR | 100 |
+|  | email | Adresse email du responsable | VARCHAR | 150 |
+|  | password | Mot de passe chiffré | VARCHAR | 255 |
+|  | photo | Chemin de la photo de profil du responsable | VARCHAR | 255 |
+| User | id_user | Identifiant unique du bachelier (PK) | INT | 11 |
+|  | nom | Nom du bachelier | VARCHAR | 100 |
+|  | prenom | Prénom du bachelier | VARCHAR | 100 |
+|  | email | Adresse email du bachelier | VARCHAR | 150 |
+|  | password | Mot de passe chiffré | VARCHAR | 255 |
+|  | id_serie | Référence à la série du bachelier (FK) | INT | 11 |
+|  | photo | Chemin de la photo de profil du bachelier | VARCHAR | 255 |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Other entities include universities, campuses, filières, séries, matières, débouchés, actualités, témoignages, recommandations, années, abonnements and association tables.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# Application-web-d-orientation-pour-les-nouveaux-bacheliers
-OrientaBac est une plateforme web qui aide les nouveaux bacheliers à choisir  leur filière d'études supérieures grâce à un questionnaire d'orientation  personnalisé et un système de recommandations intelligent.
->>>>>>> 68310b599f332d08bc68a0acceb922380771ce72

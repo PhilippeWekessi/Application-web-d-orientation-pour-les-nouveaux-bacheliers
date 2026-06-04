@@ -48,16 +48,16 @@
   <div class="container">
 
     @if(session('success'))
-      <div class="alert-success">✅ {{ session('success') }}</div>
+      <div class="alert-success">{{ session('success') }}</div>
     @endif
 
     <div class="page-header">
-      <h1>📚 Gestion des filières</h1>
+      <h1>Gestion des filières</h1>
       <div class="filtres">
         <a href="{{ route('admin.filieres') }}" class="filtre-btn {{ !request('statut') ? 'active' : '' }}">Toutes</a>
-        <a href="{{ route('admin.filieres', ['statut' => 'en_attente']) }}" class="filtre-btn {{ request('statut') == 'en_attente' ? 'active' : '' }}">⏳ En attente</a>
-        <a href="{{ route('admin.filieres', ['statut' => 'validee']) }}" class="filtre-btn {{ request('statut') == 'validee' ? 'active' : '' }}">✅ Validées</a>
-        <a href="{{ route('admin.filieres', ['statut' => 'rejetee']) }}" class="filtre-btn {{ request('statut') == 'rejetee' ? 'active' : '' }}">❌ Rejetées</a>
+        <a href="{{ route('admin.filieres', ['statut' => 'en_attente']) }}" class="filtre-btn {{ request('statut') == 'en_attente' ? 'active' : '' }}">En attente</a>
+        <a href="{{ route('admin.filieres', ['statut' => 'validee']) }}" class="filtre-btn {{ request('statut') == 'validee' ? 'active' : '' }}">Validées</a>
+        <a href="{{ route('admin.filieres', ['statut' => 'rejetee']) }}" class="filtre-btn {{ request('statut') == 'rejetee' ? 'active' : '' }}">Rejetées</a>
       </div>
     </div>
 
@@ -67,6 +67,7 @@
           <tr>
             <th>Filière</th>
             <th>Établissement</th>
+            <th>Soumis par</th>
             <th>Durée</th>
             <th>Bourse</th>
             <th>Statut</th>
@@ -76,17 +77,31 @@
         <tbody>
           @forelse($filieres as $filiere)
           <tr>
-            <td><strong>{{ $filiere->nom }}</strong></td>
+            <td>
+              <strong>{{ $filiere->nom }}</strong>
+              @if($filiere->statut === 'rejetee' && $filiere->motif_rejet)
+                <div style="font-size:12px;color:#E8112D;margin-top:4px;">
+                  <strong>Motif du rejet :</strong> {{ $filiere->motif_rejet }}
+                </div>
+              @endif
+            </td>
             <td>{{ $filiere->campus->first()?->universite?->sigle ?? 'N/A' }}</td>
+            <td>
+              @if($filiere->responsableSoumis)
+                {{ $filiere->responsableSoumis->prenom }} {{ $filiere->responsableSoumis->nom }}
+              @else
+                Admin
+              @endif
+            </td>
             <td>{{ $filiere->duree_annees }} ans</td>
             <td>{{ $filiere->quota_bourse }} places</td>
             <td>
               @if($filiere->statut === 'validee')
-                <span class="badge badge-green">✅ Validée</span>
+                <span class="badge badge-green">Validée</span>
               @elseif($filiere->statut === 'en_attente')
-                <span class="badge badge-yellow">⏳ En attente</span>
+                <span class="badge badge-yellow">En attente</span>
               @else
-                <span class="badge badge-red">❌ Rejetée</span>
+                <span class="badge badge-red">Rejetée</span>
               @endif
             </td>
             <td>
@@ -94,17 +109,17 @@
                 @if($filiere->statut === 'en_attente')
                   <form method="POST" action="{{ route('admin.filieres.valider', $filiere->id_filiere) }}">
                     @csrf
-                    <button type="submit" class="btn-val">✅ Valider</button>
+                    <button type="submit" class="btn-val" onclick="return confirm('Êtes-vous sûr de vouloir valider cette filière ?')">Valider</button>
                   </form>
                   <form method="POST" action="{{ route('admin.filieres.rejeter', $filiere->id_filiere) }}" style="display:flex;gap:6px;align-items:center;">
                     @csrf
-                    <input type="text" name="motif" class="motif-input" placeholder="Motif du rejet..." required />
-                    <button type="submit" class="btn-rej">❌ Rejeter</button>
+                    <input type="text" name="motif" class="motif-input" placeholder="Motif du rejet..." required minlength="5" />
+                    <button type="submit" class="btn-rej" onclick="return confirm('Êtes-vous sûr de vouloir rejeter cette filière ?')">Rejeter</button>
                   </form>
                 @elseif($filiere->statut === 'rejetee')
                   <form method="POST" action="{{ route('admin.filieres.valider', $filiere->id_filiere) }}">
                     @csrf
-                    <button type="submit" class="btn-val">↩️ Revalider</button>
+                    <button type="submit" class="btn-val" onclick="return confirm('Êtes-vous sûr de vouloir revalider cette filière ?')">Revalider</button>
                   </form>
                 @else
                   <span style="font-size:12px;color:#999;">Aucune action</span>

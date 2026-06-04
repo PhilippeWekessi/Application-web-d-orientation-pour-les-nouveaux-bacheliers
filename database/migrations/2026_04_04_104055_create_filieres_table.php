@@ -11,22 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // On crée la table et on ajoute tous les champs d'un coup
         Schema::create('filieres', function (Blueprint $table) {
             $table->id('id_filiere');
+            
+            // AJOUTE CETTE LIGNE ICI :
+            $table->unsignedBigInteger('id_campus')->nullable(); 
+
             $table->string('nom', 200);
             $table->text('description')->nullable();
             $table->tinyInteger('duree_annees');
             $table->enum('mode_entree', ['classement', 'concours', 'dossier', 'direct']);
             $table->integer('quota_bourse')->default(0);
             $table->integer('quota_aide_fpp')->default(0);
-            
-            // Ajout des champs que tu avais mis dans le deuxième bloc up()
             $table->enum('statut', ['en_attente', 'validee', 'rejetee'])->default('validee');
             $table->text('motif_rejet')->nullable();
             $table->unsignedBigInteger('id_universite_soumis')->nullable();
-            
             $table->timestamps();
+
+            // AJOUTE AUSSI LA CONTRAINTE DE CLÉ ÉTRANGÈRE (optionnel mais recommandé)
+            $table->foreign('id_campus')->references('id_campus')->on('campus')->onDelete('cascade');
         });
     }
 

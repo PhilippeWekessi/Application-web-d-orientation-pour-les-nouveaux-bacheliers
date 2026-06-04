@@ -86,7 +86,7 @@
 
   <!-- HERO -->
   <div class="hero">
-    <h1>🏛️ {{ $universite->nom }}</h1>
+    <h1>{{ $universite->nom }}</h1>
     <p>Découvrez les filières et campus de cette université</p>
   </div>
 
@@ -95,11 +95,11 @@
 
     <!-- UNI HEADER -->
     <div class="uni-header">
-      <div class="uni-logo">🏛️</div>
+      <div class="uni-logo"></div>
       <div class="uni-info">
         <h2>{{ $universite->nom }}</h2>
         <div class="sigle">{{ $universite->sigle }}</div>
-        <div class="ville">📍 {{ $universite->ville }}</div>
+        <div class="ville">{{ $universite->ville }}</div>
         <span class="type {{ $universite->type == 'public' ? 'badge-public' : 'badge-prive' }}">
           {{ $universite->type == 'public' ? 'Université Publique' : 'Université Privée Agréée' }}
         </span>
@@ -113,7 +113,7 @@
         @forelse($universite->campus as $campus)
           <div class="campus-card">
             <h4>{{ $campus->nom }}</h4>
-            <div class="ville">📍 {{ $campus->ville }}</div>
+            <div class="ville">{{ $campus->ville }}</div>
             <div class="filieres-list">
               @forelse($campus->filieres as $filiere)
                 <div class="filiere-item">

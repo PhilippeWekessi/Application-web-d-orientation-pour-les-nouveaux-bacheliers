@@ -2,7 +2,6 @@
 
 @section('title', 'OrientaBac - Trouve ta filière idéale')
 
-@section('styles')
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -85,13 +84,26 @@
 
     /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(135deg, #1E3A5F 0%, #2d5f8a 100%);
+      background: linear-gradient(135deg, rgba(30,58,95,0.9) 0%, rgba(45,95,138,0.9) 100%),
+                  url('/uploads/students-university.jpg.jpg') center/cover no-repeat;
       min-height: 550px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 60px 80px;
       gap: 40px;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .hero > * {
+      position: relative;
+      z-index: 2;
     }
     .hero-text { max-width: 580px; }
     .hero-badge {
@@ -385,7 +397,6 @@
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
     }
 </style>
-@endsection
 
 @section('content')
 
@@ -423,7 +434,7 @@
         <div class="etape-num">1</div>
         <div class="etape-icon"></div>
         <h3>Remplis le questionnaire</h3>
-        <p>Indique ta série de baccalauréat, tes notes dans les matières fondamentales et tes centres d'intérêt professionnels.</p>
+        <p>Indique ta série de baccalauréat,les filières et tes notes dans les matières fondamentales.</p>
       </div>
       <div class="etape">
         <div class="etape-num">2</div>
@@ -455,14 +466,14 @@
           <p>{{ $filiere->campus->pluck('universite.sigle')->implode(' · ') }}</p>
         </div>
       @empty
-        <div class="filiere-card"><div class="icon">💻</div><h4>Informatique</h4><p>IFRI · EPAC · ENEAM</p></div>
-        <div class="filiere-card"><div class="icon">⚕️</div><h4>Sciences de la Santé</h4><p>FSS · INMeS · IFSIO</p></div>
-        <div class="filiere-card"><div class="icon">⚖️</div><h4>Droit & Sciences Politiques</h4><p>FADESP · FDSP</p></div>
-        <div class="filiere-card"><div class="icon">📊</div><h4>Économie & Gestion</h4><p>FASEG · ENEAM</p></div>
-        <div class="filiere-card"><div class="icon">🌱</div><h4>Agronomie</h4><p>FSA · UNA</p></div>
-        <div class="filiere-card"><div class="icon">🏗️</div><h4>Génie Civil & BTP</h4><p>EPAC · UNSTIM</p></div>
-        <div class="filiere-card"><div class="icon">🎨</div><h4>Lettres & Arts</h4><p>FLASH · FLLAC · INMAAC</p></div>
-        <div class="filiere-card"><div class="icon">🔬</div><h4>Sciences & Techniques</h4><p>FAST · IMSP</p></div>
+        <div class="filiere-card">Informatique</h4><p>IFRI · EPAC · ENEAM</p></div>
+        <div class="filiere-card"><h4>Sciences de la Santé</h4><p>FSS · INMeS · IFSIO</p></div>
+        <div class="filiere-card"><h4>Droit & Sciences Politiques</h4><p>FADESP · FDSP</p></div>
+        <div class="filiere-card"><h4>Économie & Gestion</h4><p>FASEG · ENEAM</p></div>
+        <div class="filiere-card"><h4>Agronomie</h4><p>FSA · UNA</p></div>
+        <div class="filiere-card"><h4>Génie Civil & BTP</h4><p>EPAC · UNSTIM</p></div>
+        <div class="filiere-card"><h4>Lettres & Arts</h4><p>FLASH · FLLAC · INMAAC</p></div>
+        <div class="filiere-card"><h4>Sciences & Techniques</h4><p>FAST · IMSP</p></div>
       @endforelse
     </div>
     <div class="voir-plus">
@@ -483,11 +494,27 @@
           <div class="stars">{{ str_repeat('★', $temoignage->note) }}{{ str_repeat('☆', 5 - $temoignage->note) }}</div>
           <p>"{{ $temoignage->contenu }}"</p>
           <div class="temoignage-auteur">
-            <div class="avatar">{{ strtoupper(substr($temoignage->user->nom, 0, 1) . substr($temoignage->user->prenom, 0, 1)) }}</div>
-            <div>
-              <h5>{{ $temoignage->user->prenom }} {{ $temoignage->user->nom }}</h5>
-              <span>{{ $temoignage->filiere->nom }}</span>
-            </div>
+            @if($temoignage->user)
+              <div class="avatar">{{ strtoupper(substr($temoignage->user->nom, 0, 1) . substr($temoignage->user->prenom, 0, 1)) }}</div>
+              <div>
+                <h5>{{ $temoignage->user->prenom }} {{ $temoignage->user->nom }}</h5>
+                @if($temoignage->filiere)
+                  <span>{{ $temoignage->filiere->nom }}</span>
+                @else
+                  <span>Filière inconnue</span>
+                @endif
+              </div>
+            @else
+              <div class="avatar">??</div>
+              <div>
+                <h5>Utilisateur inconnu</h5>
+                @if($temoignage->filiere)
+                  <span>{{ $temoignage->filiere->nom }}</span>
+                @else
+                  <span>Filière inconnue</span>
+                @endif
+              </div>
+            @endif
           </div>
         </div>
       @empty

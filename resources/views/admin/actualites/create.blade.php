@@ -33,18 +33,18 @@
       <div class="alert-error">@foreach($errors->all() as $e)<p>{{ $e }}</p>@endforeach</div>
     @endif
     <div class="card">
-      <h2>📰 Publier une actualité</h2>
+      <h2>Publier une actualité</h2>
       <form method="POST" action="{{ route('admin.actualites.store') }}">
         @csrf
         <div class="form-group">
-          <label>Titre *</label>
+          <label>Titre</label>
           <input type="text" name="titre" value="{{ old('titre') }}" placeholder="Titre de l'actualité" required />
         </div>
         <div class="form-group">
-          <label>Contenu *</label>
+          <label>Contenu</label>
           <textarea name="contenu" placeholder="Rédigez le contenu de l'actualité..." required>{{ old('contenu') }}</textarea>
         </div>
-        <button type="submit" class="btn-submit">📤 Publier</button>
+        <button type="submit" class="btn-submit">Publier</button>
       </form>
     </div>
   </div>

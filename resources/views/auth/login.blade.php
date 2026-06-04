@@ -119,7 +119,7 @@
             <input type="password" name="password" placeholder="••••••••" required />
           </div>
           <div class="form-footer" style="text-align:right; margin-bottom:10px; margin-top:-10px;">
-            <a href="#">Mot de passe oublié ?</a>
+            <a href="{{ route('password.request') }}">Mot de passe oublié ?</a>
           </div>
           <button type="submit" class="btn-submit">Se connecter</button>
         </form>

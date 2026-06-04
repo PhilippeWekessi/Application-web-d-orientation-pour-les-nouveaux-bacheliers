@@ -30,14 +30,25 @@ class AdminActualiteController extends Controller
     {
         if ($r = $this->checkAuth()) return $r;
 
-        $request->validate([
-            'titre'   => 'required|string|max:200',
-            'contenu' => 'required|string',
-        ]);
+        // Validation manuelle
+        $titre = trim($request->input('titre', ''));
+        $contenu = trim($request->input('contenu', ''));
+
+        $errors = [];
+        if (empty($titre) || strlen($titre) > 200) {
+            $errors['titre'] = 'Le titre est requis (max 200 caractères).';
+        }
+        if (empty($contenu)) {
+            $errors['contenu'] = 'Le contenu est requis.';
+        }
+
+        if (!empty($errors)) {
+            return back()->withErrors($errors)->withInput();
+        }
 
         Actualite::create([
-            'titre'    => $request->titre,
-            'contenu'  => $request->contenu,
+            'titre'    => $titre,
+            'contenu'  => $contenu,
             'image'    => null,
             'id_admin' => session('admin_id'),
         ]);

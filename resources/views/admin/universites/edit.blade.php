@@ -67,26 +67,21 @@
     <div class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-section-title">Général</div>
-        <a href="{{ route('admin.dashboard') }}" class="nav-item">
-          <span class="icon">📊</span> Tableau de bord
+        <a href="{{ route('admin.dashboard') }}" class="nav-item">Tableau de bord
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">Contenu</div>
-        <a href="{{ route('admin.universites') }}" class="nav-item active">
-          <span class="icon">🏛️</span> Universités & Campus
+        <a href="{{ route('admin.universites') }}" class="nav-item active">Universités & Campus
         </a>
-        <a href="{{ route('admin.filieres') }}" class="nav-item">
-          <span class="icon">📚</span> Filières
+        <a href="{{ route('admin.filieres') }}" class="nav-item">Filières
         </a>
-        <a href="{{ route('admin.actualites') }}" class="nav-item">
-          <span class="icon">📰</span> Actualités
+        <a href="{{ route('admin.actualites') }}" class="nav-item">Actualités
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">Modération</div>
-        <a href="{{ route('admin.temoignages') }}" class="nav-item">
-          <span class="icon">💬</span> Témoignages
+        <a href="{{ route('admin.temoignages') }}" class="nav-item">Témoignages
         </a>
       </div>
     </div>
@@ -94,9 +89,7 @@
     <div class="sidebar-bottom">
       <form method="POST" action="{{ route('admin.logout') }}">
         @csrf
-        <button type="submit" class="btn-logout">
-          <span>🚪</span> Se déconnecter
-        </button>
+        <button type="submit" class="btn-logout">Se déconnecter</button>
       </form>
     </div>
   </div>

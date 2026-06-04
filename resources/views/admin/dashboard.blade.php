@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Administration — OrientaBac</title>
-  <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background-color: #eef3f8; color: #1f2937; display: flex; min-height: 100vh; }
@@ -43,6 +43,21 @@
     .topbar-left p { font-size: 14px; color: #4b5563; margin-top: 6px; }
     .topbar-right { display: flex; align-items: center; gap: 16px; }
     .topbar-date { font-size: 13px; color: #6b7280; }
+
+    .admin-alert {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      color: #92400e;
+      padding: 18px 22px;
+      border-radius: 18px;
+      margin: 0 36px 24px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .admin-alert a { color: #b45309; font-weight: 700; text-decoration: underline; }
 
     .admin-content { padding: 0 36px 34px; flex: 1; }
 
@@ -144,7 +159,11 @@
 
     <div class="sidebar-admin-info">
       <div class="admin-avatar">
-        {{ strtoupper(substr(session('admin_nom', 'A'), 0, 1) . substr(session('admin_prenom', 'D'), 0, 1)) }}
+        @if(session('admin_photo'))
+          <img src="{{ asset('storage/' . session('admin_photo')) }}" alt="Photo de profil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+        @else
+          {{ strtoupper(substr(session('admin_nom', 'A'), 0, 1) . substr(session('admin_prenom', 'D'), 0, 1)) }}
+        @endif
       </div>
       <div class="admin-info">
         <h4>{{ session('admin_prenom', 'Admin') }} {{ session('admin_nom', '') }}</h4>
@@ -155,46 +174,40 @@
     <div class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-section-title">Général</div>
-        <a href="{{ route('admin.dashboard') }}" class="nav-item active">
-          <span class="icon">🏠</span> Tableau de bord
+        <a href="{{ route('admin.dashboard') }}" class="nav-item active">Tableau de bord
+        </a>
+        <a href="{{ route('admin.profil') }}" class="nav-item">Mon profil
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">Contenu</div>
-        <a href="{{ route('admin.universites') }}" class="nav-item">
-          <span class="icon">🏛️</span> Universités & Campus
+        <a href="{{ route('admin.universites') }}" class="nav-item"> Universités & Campus
           @if($universitesEnAttente > 0)
             <span class="nav-badge">{{ $universitesEnAttente }}</span>
           @endif
         </a>
-        <a href="{{ route('admin.filieres') }}" class="nav-item">
-          <span class="icon">🎓</span> Filières
+        <a href="{{ route('admin.filieres') }}" class="nav-item">Filières
           @if($filiersEnAttente > 0)
             <span class="nav-badge">{{ $filiersEnAttente }}</span>
           @endif
         </a>
-        <a href="{{ route('admin.actualites') }}" class="nav-item">
-          <span class="icon">📰</span> Actualités
+        <a href="{{ route('admin.actualites') }}" class="nav-item">Actualités
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">Modération</div>
-        <a href="{{ route('admin.temoignages') }}" class="nav-item">
-          <span class="icon">💬</span> Témoignages
+        <a href="{{ route('admin.temoignages') }}" class="nav-item">Témoignages
           @if($temoignagesEnAttente > 0)
             <span class="nav-badge">{{ $temoignagesEnAttente }}</span>
           @endif
         </a>
       </div>
-    </div>
-
-    <div class="sidebar-bottom">
-      <form method="POST" action="{{ route('admin.logout') }}">
-        @csrf
-        <button type="submit" class="btn-logout">
-          <span>🚪</span> Se déconnecter
-        </button>
-      </form>
+      <div class="sidebar-bottom">
+        <form method="POST" action="{{ route('admin.logout') }}">
+          @csrf
+          <button type="submit" class="btn-logout">Se déconnecter</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -211,12 +224,19 @@
       </div>
     </div>
 
+    @if($temoignagesEnAttente > 0)
+      <div class="admin-alert">
+        <strong>Nouvelle modération requise :</strong>
+        Il y a <strong>{{ $temoignagesEnAttente }}</strong> témoignage(s) en attente de validation.
+        <a href="{{ route('admin.temoignages') }}">Voir les témoignages</a>
+      </div>
+    @endif
+
     <div class="admin-content">
 
       <!-- STATS -->
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-icon green">🎓</div>
           <div class="stat-info">
             <h3>{{ $totalFilieres }}</h3>
             <p>Filières enregistrées</p>
@@ -224,7 +244,6 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon blue">🏛️</div>
           <div class="stat-info">
             <h3>{{ $totalUniversites }}</h3>
             <p>Universités & Écoles</p>
@@ -232,7 +251,6 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon yellow">💬</div>
           <div class="stat-info">
             <h3>{{ $totalTemoignages }}</h3>
             <p>Témoignages publiés</p>
@@ -240,7 +258,6 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon red">📰</div>
           <div class="stat-info">
             <h3>{{ $totalActualites }}</h3>
             <p>Actualités publiées</p>
@@ -434,7 +451,7 @@
           </div>
 
           <div class="alert-warning">
-            <h4>⚠️ Rappel important</h4>
+            <h4>Rappel important</h4>
             <p>Pensez à mettre à jour les quotas et filières avant l'ouverture de la plateforme AprèsMonBac.bj.</p>
           </div>
         </div>

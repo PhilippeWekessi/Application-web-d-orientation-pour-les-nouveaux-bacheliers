@@ -7,10 +7,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background-color: #F4F6F9; color: #333333; }
 
-    .drapeau-bande { height: 8px; position: relative; display: flex; }
-    .drapeau-bande::before { content: ''; position: absolute; left: 0; top: 0; width: 33%; height: 100%; background-color: #008751; }
-    .drapeau-bande::after { content: ''; position: absolute; left: 33%; top: 0; width: 67%; height: 50%; background-color: #FCD116; box-shadow: 0 4px 0 0 #E8112D; }
-
     nav { background-color: #1E3A5F; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; position: sticky; top: 0; z-index: 100; }
     nav .logo { color: white; font-size: 22px; font-weight: bold; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
     .logo-flag { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; width: 22px; height: 16px; border-radius: 2px; overflow: hidden; }
@@ -51,7 +47,6 @@
 
     .form-group { margin-bottom: 24px; }
     .form-group label { display: block; font-size: 14px; font-weight: bold; color: #1E3A5F; margin-bottom: 8px; }
-    .form-group label span.required { color: #E8112D; margin-left: 3px; }
     .form-group select, .form-group input[type="number"] { width: 100%; padding: 12px 16px; border: 2px solid #E0E0E0; border-radius: 8px; font-size: 14px; color: #333; background-color: #FAFAFA; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; }
     .form-group select:focus, .form-group input[type="number"]:focus { outline: none; border-color: #008751; background-color: white; }
     .select-wrapper { position: relative; }
@@ -66,14 +61,6 @@
     .note-input-wrapper .sur20 { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #999; font-weight: bold; }
     .coef-badge { display: inline-block; background-color: rgba(30,58,95,0.08); color: #1E3A5F; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
 
-    .interets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .interet-item { border: 2px solid #E0E0E0; border-radius: 8px; padding: 12px 10px; text-align: center; cursor: pointer; transition: all 0.2s; user-select: none; }
-    .interet-item:hover { border-color: #008751; background-color: rgba(0,135,81,0.05); }
-    .interet-item.selected { border-color: #008751; background-color: rgba(0,135,81,0.1); }
-    .interet-item input[type="checkbox"] { display: none; }
-    .interet-item .interet-icon { font-size: 26px; margin-bottom: 6px; pointer-events: none; }
-    .interet-item .interet-label { font-size: 12px; font-weight: bold; color: #1E3A5F; pointer-events: none; }
-
     .form-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; padding-top: 25px; border-top: 1px solid #eee; }
     .btn-retour { padding: 12px 28px; border: 2px solid #1E3A5F; color: #1E3A5F; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: transparent; cursor: pointer; transition: all 0.2s; }
     .btn-retour:hover { background-color: #1E3A5F; color: white; }
@@ -83,7 +70,6 @@
     .btn-soumettre:hover { background-color: #e6be00; }
 
     .info-box { background-color: rgba(0,135,81,0.08); border: 1px solid rgba(0,135,81,0.3); border-radius: 8px; padding: 14px 16px; margin-bottom: 24px; display: flex; gap: 10px; align-items: flex-start; }
-    .info-box .info-icon { font-size: 18px; flex-shrink: 0; }
     .info-box p { font-size: 13px; color: #444; line-height: 1.5; }
     .formule-box { background-color: rgba(30,58,95,0.06); border: 1px solid rgba(30,58,95,0.15); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; color: #1E3A5F; font-weight: bold; text-align: center; }
 
@@ -91,9 +77,6 @@
     .etape-form.active { display: block; }
 
     footer { background-color: #12253d; padding: 50px 80px 30px; }
-    .footer-top-band { height: 8px; position: relative; margin-bottom: 40px; border-radius: 2px; overflow: hidden; }
-    .footer-top-band::before { content: ''; position: absolute; left: 0; top: 0; width: 33%; height: 100%; background-color: #008751; }
-    .footer-top-band::after { content: ''; position: absolute; left: 33%; top: 0; width: 67%; height: 50%; background-color: #FCD116; box-shadow: 0 4px 0 0 #E8112D; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-brand .logo { color: white; font-size: 20px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .footer-brand .logo span { color: #FCD116; }
@@ -111,7 +94,6 @@
       .hamburger { display: flex; }
       .progress-section { padding: 20px; }
       .form-card { padding: 25px 20px; }
-      .interets-grid { grid-template-columns: repeat(2, 1fr); }
       .form-actions { flex-direction: column; gap: 12px; }
       .btn-retour, .btn-suivant, .btn-soumettre { width: 100%; text-align: center; }
       footer { padding: 40px 20px 20px; }
@@ -137,354 +119,297 @@
     </div>
     <div class="steps-dots">
       <div class="dot active" id="dot1"><div class="dot-circle">1</div><span>Ton profil</span></div>
-      <div class="dot" id="dot2"><div class="dot-circle">2</div><span>Tes intérêts</span></div>
+      <div class="dot" id="dot2"><div class="dot-circle">2</div><span>Ta filière</span></div>
       <div class="dot" id="dot3"><div class="dot-circle">3</div><span>Tes notes</span></div>
     </div>
   </div>
 
   <div class="form-section">
-    <div class="form-card">
+    <form id="questionnaireForm" method="POST" action="{{ route('questionnaire.submit') }}">
+      @csrf
+      <div class="form-card">
 
-      <!-- ETAPE 1 : PROFIL -->
-      <div class="etape-form active" id="etape1">
-        <h2>👤 Ton profil</h2>
-        <p class="form-subtitle">Commence par les informations de base sur ton baccalauréat.</p>
+        <!-- ETAPE 1 : PROFIL -->
+        <div class="etape-form active" id="etape1">
+          <h2>Ton profil</h2>
+          <p class="form-subtitle">Commence par les informations de base sur ton baccalauréat.</p>
 
-        <div class="info-box">
-          <span class="info-icon">ℹ️</span>
-          <p>Tu n'as pas besoin de te connecter pour passer ce test. Tes résultats seront affichés immédiatement.</p>
-        </div>
+          <div class="info-box">
+            <p>Tu n'as pas besoin de te connecter pour passer ce test. Tes résultats seront affichés immédiatement.</p>
+          </div>
 
-        <div class="form-group">
-          <label>Série de baccalauréat <span class="required">*</span></label>
-          <div class="select-wrapper">
-            <select id="serie">
-              <option value="">-- Sélectionne ta série --</option>
-              @foreach($series as $serie)
-                <option value="{{ $serie->code }}">Série {{ $serie->code }} — {{ $serie->libelle }}</option>
-              @endforeach
-            </select>
+          <div class="form-group">
+            <label>Série de baccalauréat</label>
+            <div class="select-wrapper">
+              <select id="serie" name="serie">
+                <option value="">-- Sélectionne ta série --</option>
+                @foreach($series as $serie)
+                  <option value="{{ $serie->code }}">Série {{ $serie->code }} — {{ $serie->libelle }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Mention obtenue au baccalauréat</label>
+            <div class="select-wrapper">
+              <select id="mention" name="mention">
+                <option value="">-- Sélectionne ta mention --</option>
+                <option value="TB">Très Bien (16/20 et plus)</option>
+                <option value="B">Bien (14/20 à 15,99)</option>
+                <option value="AB">Assez Bien (12/20 à 13,99)</option>
+                <option value="P">Passable (10/20 à 11,99)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Moyenne générale au baccalauréat</label>
+            <div class="note-input-wrapper">
+              <input type="number" id="moyenne" name="moyenne" min="10" max="20" step="0.01" placeholder="Ex : 13.50" />
+              <span class="sur20">/20</span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <span></span>
+            <button type="button" class="btn-suivant" onclick="allerEtape(2)">Suivant →</button>
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Mention obtenue au baccalauréat <span class="required">*</span></label>
-          <div class="select-wrapper">
-            <select id="mention">
-              <option value="">-- Sélectionne ta mention --</option>
-              <option value="TB">Très Bien (16/20 et plus)</option>
-              <option value="B">Bien (14/20 à 15,99)</option>
-              <option value="AB">Assez Bien (12/20 à 13,99)</option>
-              <option value="P">Passable (10/20 à 11,99)</option>
-            </select>
+        <!-- ETAPE 2 : FILIERE -->
+        <div class="etape-form" id="etape2">
+          <h2>Choisir la filière souhaitée</h2>
+          <p class="form-subtitle">Sélectionnez la filière qui vous intéresse le plus.</p>
+
+          <div class="form-group">
+            <label>Filière souhaitée</label>
+            <div class="select-wrapper">
+              <select id="filiere" name="filiere">
+                <option value="">-- Sélectionnez une filière --</option>
+                @foreach($filieres as $filiere)
+                  <option value="{{ $filiere->id_filiere }}">{{ $filiere->nom }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:24px;">
+            <label>Ambition professionnelle</label>
+            <div class="select-wrapper">
+              <select id="ambition" name="ambition">
+                <option value="">-- Qu'est-ce qui t'attire le plus ? --</option>
+                <option value="emploi_public">Travailler dans la fonction publique</option>
+                <option value="emploi_prive">Travailler dans le secteur privé</option>
+                <option value="entrepreneuriat">Créer ma propre entreprise</option>
+                <option value="recherche">Faire de la recherche scientifique</option>
+                <option value="international">Travailler à l'international</option>
+                <option value="nsp">Je ne sais pas encore</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-retour" onclick="allerEtape(1)">← Retour</button>
+            <button type="button" class="btn-suivant" onclick="allerEtape(3)">Suivant →</button>
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Moyenne générale au baccalauréat <span class="required">*</span></label>
+        <!-- ETAPE 3 : NOTES -->
+        <div class="etape-form" id="etape3">
+          <h2>Tes notes</h2>
+          <p class="form-subtitle">Notes dans les 3 matières fondamentales de ta filière choisie.</p>
+
+          <div class="info-box">
+            <p>Ces notes permettent de calculer ta moyenne de classement selon la formule officielle du MESRS.</p>
+          </div>
+
+          <div class="formule-box" id="formuleBox">
+            M = (m1 × coef1 + m2 × coef2 + m3 × coef3) / (coef1 + coef2 + coef3)
+          </div>
+
+          <div class="notes-container" id="notesContainer"></div>
+
+          <input type="hidden" id="scoreInput" name="score" value="" />
+          <input type="hidden" id="notesInput" name="notes" value="" />
+
+          <div class="form-actions">
+            <button type="button" class="btn-retour" onclick="allerEtape(2)">← Retour</button>
+            <button type="button" class="btn-soumettre" onclick="soumettre()">Voir mes recommandations</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // ===== DONNÉES =====
+    const matieresSerie   = @json($matieresSerie);
+    const matieresFiliere = @json($matieresFiliere);
+
+    // ===== RÉFÉRENCES DOM =====
+    const progressFill  = document.getElementById('progressFill');
+    const stepLabel     = document.getElementById('stepLabel');
+    const stepPercent   = document.getElementById('stepPercent');
+    const notesContainer = document.getElementById('notesContainer');
+    const serieSelect   = document.getElementById('serie');
+    const filiereSelect = document.getElementById('filiere');
+    const mentionSelect = document.getElementById('mention');
+    const moyenneInput  = document.getElementById('moyenne');
+    const scoreInput    = document.getElementById('scoreInput');
+    const notesInput    = document.getElementById('notesInput');
+
+    // ===== NAVIGATION ÉTAPES =====
+    function allerEtape(step) {
+      // Validation étape 1
+      if (step === 2) {
+        const serie   = serieSelect.value;
+        const mention = mentionSelect.value;
+        const moyenne = moyenneInput.value;
+
+        if (!serie)   { alert('Veuillez sélectionner votre série.'); return; }
+        if (!mention) { alert('Veuillez sélectionner votre mention.'); return; }
+        if (!moyenne) { alert('Veuillez entrer votre moyenne générale.'); return; }
+        if (parseFloat(moyenne) < 10 || parseFloat(moyenne) > 20) {
+          alert('La moyenne doit être entre 10 et 20.');
+          return;
+        }
+      }
+
+      // Validation étape 2 + génération des champs notes
+      if (step === 3) {
+        const filiere = filiereSelect.value;
+        if (!filiere) { alert('Veuillez sélectionner une filière.'); return; }
+        renderNotes();
+      }
+
+      // Masquer toutes les étapes
+      [1, 2, 3].forEach(i => {
+        document.getElementById('etape' + i).classList.remove('active');
+        document.getElementById('dot' + i).classList.remove('active');
+      });
+
+      // Marquer les étapes précédentes comme "done"
+      for (let i = 1; i < step; i++) {
+        document.getElementById('dot' + i).classList.add('done');
+      }
+      // Retirer "done" des étapes à venir
+      for (let i = step; i <= 3; i++) {
+        document.getElementById('dot' + i).classList.remove('done');
+      }
+
+      // Afficher l'étape courante
+      document.getElementById('etape' + step).classList.add('active');
+      document.getElementById('dot' + step).classList.add('active');
+
+      // Barre de progression
+      const percent = Math.round((step / 3) * 100);
+      progressFill.style.width = percent + '%';
+      stepPercent.textContent  = percent + '%';
+      const labels = ['', 'Ton profil', 'Ta filière', 'Tes notes'];
+      stepLabel.textContent = 'Étape ' + step + ' sur 3 — ' + labels[step];
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ===== AFFICHAGE DES CHAMPS DE NOTES =====
+    function renderNotes() {
+      const serie   = serieSelect.value;
+      const filiere = filiereSelect.value;
+
+      // Chercher les matières de la filière (prendre les 3 premières par coefficient)
+      const sujetFiliere = matieresFiliere[filiere] || [];
+      let sujets = [];
+
+      if (sujetFiliere.length >= 3) {
+        // Utiliser les matières de la filière
+        sujets = sujetFiliere.slice(0, 3).map(item => ({
+          nom:  item.nom,
+          coef: item.coefficient ?? item.coef ?? 1
+        }));
+      } else if (matieresSerie[serie] && matieresSerie[serie].length > 0) {
+        // Fallback : utiliser les matières de la série
+        sujets = matieresSerie[serie].slice(0, 3);
+      }
+
+      if (sujets.length === 0) {
+        notesContainer.innerHTML = '<div class="info-box"><p>Aucune matière disponible pour cette filière. Vérifie ta sélection puis réessaie.</p></div>';
+        return;
+      }
+
+      // Afficher la formule
+      const totalCoef = sujets.reduce((a, m) => a + m.coef, 0);
+      const formule   = sujets.map(m => `${m.nom.split(' ')[0]}×${m.coef}`).join(' + ');
+      document.getElementById('formuleBox').innerHTML =
+        `M = (${formule}) / ${totalCoef}`;
+
+      // Générer les champs de saisie
+      notesContainer.innerHTML = sujets.map((matiere, index) => `
+        <div class="note-item">
+          <label>${matiere.nom} <span class="coef-badge">coef. ${matiere.coef}</span></label>
           <div class="note-input-wrapper">
-            <input type="number" id="moyenne" min="10" max="20" step="0.01" placeholder="Ex : 13.50" />
+            <input
+              type="number"
+              class="note-field"
+              data-coef="${matiere.coef}"
+              data-name="${matiere.nom}"
+              min="0" max="20" step="0.01"
+              placeholder="Ex : 14.50"
+            />
             <span class="sur20">/20</span>
           </div>
         </div>
+      `).join('');
+    }
 
-        <div class="form-actions">
-          <span></span>
-          <button class="btn-suivant" onclick="allerEtape(2)">Suivant →</button>
-        </div>
-      </div>
+    // ===== SOUMISSION =====
+    function soumettre() {
+      const noteFields = Array.from(document.querySelectorAll('.note-field'));
 
-      <!-- ETAPE 2 : INTERETS -->
-      <div class="etape-form" id="etape2">
-        <h2>❤️ Tes centres d'intérêt</h2>
-        <p class="form-subtitle">Sélectionne les domaines qui t'intéressent (1, 2 ou 3 choix).</p>
+      if (!noteFields.length) {
+        alert('Aucune matière affichée. Retourne à l\'étape précédente et réessaie.');
+        return;
+      }
 
-        <div class="form-group">
-          <label>Domaines d'intérêt <span class="required">*</span></label>
-          <div class="interets-grid" id="interetsGrid">
+      const notesData = [];
+      let totalProduit = 0;
+      let totalCoef    = 0;
 
-            @if($interets->isNotEmpty())
-              @foreach($interets as $interet)
-                <div class="interet-item" data-value="{{ $interet->id_interet }}">
-                  <input type="checkbox" value="{{ $interet->id_interet }}" />
-                  <div class="interet-icon">{{ $interet->icone ?? '🎓' }}</div>
-                  <div class="interet-label">{{ $interet->libelle }}</div>
-                </div>
-              @endforeach
-            @else
-              <div class="interet-item" data-value="informatique">
-                <input type="checkbox" value="informatique" />
-                <div class="interet-icon">💻</div>
-                <div class="interet-label">Informatique & Numérique</div>
-              </div>
-              <div class="interet-item" data-value="sante">
-                <input type="checkbox" value="sante" />
-                <div class="interet-icon">⚕️</div>
-                <div class="interet-label">Santé & Médecine</div>
-              </div>
-              <div class="interet-item" data-value="droit">
-                <input type="checkbox" value="droit" />
-                <div class="interet-icon">⚖️</div>
-                <div class="interet-label">Droit & Justice</div>
-              </div>
-              <div class="interet-item" data-value="economie">
-                <input type="checkbox" value="economie" />
-                <div class="interet-icon">📊</div>
-                <div class="interet-label">Économie & Gestion</div>
-              </div>
-              <div class="interet-item" data-value="agriculture">
-                <input type="checkbox" value="agriculture" />
-                <div class="interet-icon">🌱</div>
-                <div class="interet-label">Agriculture & Environnement</div>
-              </div>
-              <div class="interet-item" data-value="ingenierie">
-                <input type="checkbox" value="ingenierie" />
-                <div class="interet-icon">🏗️</div>
-                <div class="interet-label">Ingénierie & BTP</div>
-              </div>
-              <div class="interet-item" data-value="lettres">
-                <input type="checkbox" value="lettres" />
-                <div class="interet-icon">📚</div>
-                <div class="interet-label">Lettres & Sciences Humaines</div>
-              </div>
-              <div class="interet-item" data-value="sciences">
-                <input type="checkbox" value="sciences" />
-                <div class="interet-icon">🔬</div>
-                <div class="interet-label">Sciences & Recherche</div>
-              </div>
-              <div class="interet-item" data-value="arts">
-                <input type="checkbox" value="arts" />
-                <div class="interet-icon">🎨</div>
-                <div class="interet-label">Arts & Culture</div>
-              </div>
-            @endif
+      for (const input of noteFields) {
+        const note = parseFloat(input.value);
+        const coef = parseFloat(input.dataset.coef);
+        const nom  = input.dataset.name;
 
-          </div>
-        </div>
+        if (input.value === '' || Number.isNaN(note)) {
+          alert('Merci de saisir une note valide pour : ' + nom);
+          input.focus();
+          return;
+        }
+        if (note < 0 || note > 20) {
+          alert('La note de ' + nom + ' doit être entre 0 et 20.');
+          input.focus();
+          return;
+        }
 
-        <div class="form-group" style="margin-top:24px;">
-          <label>Ambition professionnelle</label>
-          <div class="select-wrapper">
-            <select id="ambition">
-              <option value="">-- Qu'est-ce qui t'attire le plus ? --</option>
-              <option value="emploi_public">Travailler dans la fonction publique</option>
-              <option value="emploi_prive">Travailler dans le secteur privé</option>
-              <option value="entrepreneuriat">Créer ma propre entreprise</option>
-              <option value="recherche">Faire de la recherche scientifique</option>
-              <option value="international">Travailler à l'international</option>
-              <option value="nsp">Je ne sais pas encore</option>
-            </select>
-          </div>
-        </div>
+        notesData.push({ matiere: nom, note: note, coef: coef });
+        totalProduit += note * coef;
+        totalCoef    += coef;
+      }
 
-        <div class="form-actions">
-          <button class="btn-retour" onclick="allerEtape(1)">← Retour</button>
-          <button class="btn-suivant" onclick="allerEtape(3)">Suivant →</button>
-        </div>
-      </div>
+      const score = totalCoef > 0 ? totalProduit / totalCoef : 0;
 
-      <!-- ETAPE 3 : NOTES -->
-      <div class="etape-form" id="etape3">
-        <h2>📝 Tes notes</h2>
-        <p class="form-subtitle">Notes dans les 3 matières fondamentales de ta série.</p>
+      // Remplir les champs cachés
+      scoreInput.value = score.toFixed(4);
+      notesInput.value = JSON.stringify(notesData);
 
-        <div class="info-box">
-          <span class="info-icon">💡</span>
-          <p>Ces notes permettent de calculer ta moyenne de classement selon la formule officielle du MESRS.</p>
-        </div>
-
-        <div class="formule-box" id="formuleBox">
-          M = (m1 × coef1 + m2 × coef2 + m3 × coef3) / (coef1 + coef2 + coef3)
-        </div>
-
-        <div class="notes-container" id="notesContainer"></div>
-
-        <div class="form-actions">
-          <button class="btn-retour" onclick="allerEtape(2)">← Retour</button>
-          <button class="btn-soumettre" onclick="soumettre()">Voir mes recommandations</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
+      // Soumettre le formulaire
+      document.getElementById('questionnaireForm').submit();
+    }
+  </script>
 
 @endsection
 
 @section('scripts')
-<script>
-  let etapeActuelle = 1;
-  const matieresSerie = @json($matieresSerie);
-
-  // ===== GESTION SELECTION INTERETS =====
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.interet-item').forEach(function(item) {
-      item.addEventListener('click', function() {
-        const checkbox  = this.querySelector('input[type="checkbox"]');
-        const isSelected = this.classList.contains('selected');
-
-        if (isSelected) {
-          this.classList.remove('selected');
-          checkbox.checked = false;
-        } else {
-          // Max 3 sélections
-          const nbSelected = document.querySelectorAll('.interet-item.selected').length;
-          if (nbSelected >= 3) {
-            alert('⚠️ Tu peux sélectionner au maximum 3 centres d\'intérêt.');
-            return;
-          }
-          this.classList.add('selected');
-          checkbox.checked = true;
-        }
-      });
-    });
-  });
-
-  // ===== GENERATION CHAMPS NOTES =====
-  function genererChampNotes(serie) {
-    const container  = document.getElementById('notesContainer');
-    const formuleBox = document.getElementById('formuleBox');
-    const matieres   = matieresSerie[serie];
-
-    if (!matieres) {
-      container.innerHTML = '<p style="color:#999;font-size:14px;">Série non trouvée. Veuillez retourner à l\'étape 1.</p>';
-      return;
-    }
-
-    const noms  = matieres.map(m => m.nom.split(' ')[0]);
-    const coefs = matieres.map(m => m.coef);
-    const total = coefs.reduce((a,b) => a+b, 0);
-
-    formuleBox.innerHTML = `📐 Formule MESRS : M = (${noms[0]}×${coefs[0]} + ${noms[1]}×${coefs[1]} + ${noms[2]}×${coefs[2]}) / ${total}`;
-
-    container.innerHTML = matieres.map((m, i) => `
-      <div class="note-item">
-        <label>${m.nom} <span class="coef-badge">Coef. ${m.coef}</span></label>
-        <div class="note-input-wrapper">
-          <input type="number" id="note${i}" min="0" max="20" step="0.25" placeholder="0.00" />
-          <span class="sur20">/20</span>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  // ===== NAVIGATION ENTRE ETAPES =====
-  function allerEtape(num) {
-
-    // Validation étape 1
-    if (num === 2) {
-      const serie   = document.getElementById('serie').value;
-      const mention = document.getElementById('mention').value;
-      const moyenne = document.getElementById('moyenne').value;
-      if (!serie || !mention || !moyenne) {
-        alert('⚠️ Veuillez remplir tous les champs obligatoires.');
-        return;
-      }
-    }
-
-    // Validation étape 2 + génération notes
-    if (num === 3) {
-      const nbSelected = document.querySelectorAll('.interet-item.selected').length;
-      if (nbSelected === 0) {
-        alert('⚠️ Veuillez sélectionner au moins un centre d\'intérêt.');
-        return;
-      }
-      const serie = document.getElementById('serie').value;
-      genererChampNotes(serie);
-    }
-
-    // Cacher étape actuelle
-    document.getElementById('etape' + etapeActuelle).classList.remove('active');
-    document.getElementById('dot' + etapeActuelle).classList.remove('active');
-    document.getElementById('dot' + etapeActuelle).classList.add('done');
-
-    // Afficher nouvelle étape
-    etapeActuelle = num;
-    document.getElementById('etape' + num).classList.add('active');
-
-    // Mettre à jour les dots
-    for (let i = num; i <= 3; i++) {
-      document.getElementById('dot' + i).classList.remove('done');
-    }
-    document.getElementById('dot' + num).classList.add('active');
-
-    // Mettre à jour la barre de progression
-    const percent = Math.round((num / 3) * 100);
-    document.getElementById('progressFill').style.width = percent + '%';
-    document.getElementById('stepPercent').textContent  = percent + '%';
-
-    const labels = ['', 'Ton profil', 'Tes intérêts', 'Tes notes'];
-    document.getElementById('stepLabel').textContent = 'Étape ' + num + ' sur 3 — ' + labels[num];
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // ===== SOUMISSION =====
-  function soumettre() {
-    const serie   = document.getElementById('serie').value;
-    const mention = document.getElementById('mention').value;
-    const moyenne = document.getElementById('moyenne').value;
-    const matieres = matieresSerie[serie];
-
-    if (!matieres) {
-      alert('⚠️ Série introuvable.');
-      return;
-    }
-
-    // Récupérer les notes
-    const notes = matieres.map((m, i) => {
-      const val = parseFloat(document.getElementById('note' + i)?.value);
-      return isNaN(val) ? 0 : val;
-    });
-
-    // Vérifier que les notes sont remplies
-    const notesVides = notes.some(n => n < 0 || n > 20);
-    if (notesVides) {
-      alert('⚠️ Veuillez entrer des notes valides entre 0 et 20.');
-      return;
-    }
-
-    // Récupérer les intérêts sélectionnés
-    const interets = Array.from(document.querySelectorAll('.interet-item.selected input'))
-                         .map(el => el.value);
-
-    const ambition = document.getElementById('ambition')?.value || '';
-
-    // Calculer le score MESRS
-    const coefs     = matieres.map(m => m.coef);
-    const totalCoef = coefs.reduce((a,b) => a+b, 0);
-    const score     = notes.reduce((sum, note, i) => sum + note * coefs[i], 0) / totalCoef;
-
-    // Créer le formulaire POST
-    const form  = document.createElement('form');
-    form.method = 'POST';
-    form.action = '{{ route("questionnaire.submit") }}';
-
-    const csrf  = document.createElement('input');
-    csrf.type   = 'hidden';
-    csrf.name   = '_token';
-    csrf.value  = '{{ csrf_token() }}';
-    form.appendChild(csrf);
-
-    const fields = {
-      serie,
-      mention,
-      moyenne,
-      score:    score.toFixed(2),
-      ambition,
-      interets: JSON.stringify(interets),
-      notes:    JSON.stringify(notes)
-    };
-
-    Object.entries(fields).forEach(([key, value]) => {
-      const input = document.createElement('input');
-      input.type  = 'hidden';
-      input.name  = key;
-      input.value = value;
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-  }
-</script>
+{{-- Tout le JS est déjà dans @section('content') --}}
 @endsection

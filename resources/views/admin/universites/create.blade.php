@@ -34,20 +34,20 @@
       <div class="alert-error">@foreach($errors->all() as $e)<p>{{ $e }}</p>@endforeach</div>
     @endif
     <div class="card">
-      <h2>🏛️ Ajouter une université</h2>
+      <h2>Ajouter une université</h2>
       <form method="POST" action="{{ route('admin.universites.store') }}">
         @csrf
         <div class="form-grid">
           <div class="form-group full">
-            <label>Nom complet *</label>
+            <label>Nom complet</label>
             <input type="text" name="nom" value="{{ old('nom') }}" placeholder="Ex: Université d'Abomey-Calavi" required />
           </div>
           <div class="form-group">
-            <label>Sigle *</label>
+            <label>Sigle</label>
             <input type="text" name="sigle" value="{{ old('sigle') }}" placeholder="Ex: UAC" required />
           </div>
           <div class="form-group">
-            <label>Ville *</label>
+            <label>Ville</label>
             <select name="ville" required>
               <option value="">-- Sélectionner --</option>
               <option value="Cotonou">Cotonou</option>
@@ -60,7 +60,7 @@
             </select>
           </div>
           <div class="form-group full">
-            <label>Type *</label>
+            <label>Type</label>
             <select name="type" required>
               <option value="public" {{ old('type') == 'public' ? 'selected' : '' }}>Public</option>
               <option value="prive" {{ old('type') == 'prive' ? 'selected' : '' }}>Privé</option>

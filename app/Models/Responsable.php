@@ -6,7 +6,7 @@ class Responsable extends Model
 {
     protected $table = 'responsables';
     protected $primaryKey = 'id_responsable';
-    protected $fillable = ['nom', 'prenom', 'email', 'password', 'telephone', 'fonction', 'id_universite', 'statut'];
+    protected $fillable = ['nom', 'prenom', 'email', 'password', 'telephone', 'fonction', 'id_universite', 'statut', 'photo'];
     protected $hidden = ['password'];
 
     public function universite() {

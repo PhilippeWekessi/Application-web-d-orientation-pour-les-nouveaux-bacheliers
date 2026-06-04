@@ -60,4 +60,6 @@ class UniversiteController extends Controller
 
         return view('universites.show', compact('universite'));
     }
+
+    
 }
